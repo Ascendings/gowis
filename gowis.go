@@ -5,8 +5,10 @@ import (
 	"net/http"
 	"strings"
 
+	"github.com/go-macaron/pongo2"
+
 	"gopkg.in/ini.v1"
-	macaron "gopkg.in/macaron.v1"
+	"gopkg.in/macaron.v1"
 
 	"gogs.ballantine.tech/gballan1/gowis/app"
 )
@@ -15,8 +17,14 @@ func main() {
 	// initialize macaron router
 	m := macaron.Classic()
 
-	// setup the template engine
-	app.InitTemplates(*m)
+	// setup the Pongo2 template engine
+	m.Use(pongo2.Pongoer(pongo2.Options{
+		Directory:  "views",
+		Extensions: []string{".tmpl", ".html", "jinja"},
+		Charset:    "UTF-8",
+		IndentJSON: true,
+		IndentXML:  true,
+	}))
 
 	// initialize the router with routes
 	app.InitRouter(*m)
