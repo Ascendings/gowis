@@ -11,6 +11,7 @@ func main() {
 	// initialize router
 	m := app.InitRouter()
 
+	// let the user know we're running!
 	log.Println("Server is running...")
 	log.Println(http.ListenAndServe("0.0.0.0:4000", m))
 }

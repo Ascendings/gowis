@@ -11,11 +11,8 @@ func InitRouter() *macaron.Macaron {
 	// create new router
 	m := macaron.Classic()
 
-	// create wiki router
-	w := new(routers.Wiki)
-
 	// define routes
-	m.Get("/", w.Home)
+	m.Get("/", routers.WikiHome)
 
 	// return the compeleted router
 	return m
