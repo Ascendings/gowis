@@ -2,6 +2,6 @@
 path = gogs.ballantine.tech/gballan1/gowis
 
 [deps]
-github.com/go-ini/ini =
 github.com/slene/blackfriday =
+gopkg.in/ini.v1 =
 gopkg.in/macaron.v1 =

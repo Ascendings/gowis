@@ -1,5 +1,6 @@
 [run]
 init_cmds = [
+	["gopm", "get"],
 	["gopm", "install"],
 	["gopm", "build"],
 	["./gowis"]
