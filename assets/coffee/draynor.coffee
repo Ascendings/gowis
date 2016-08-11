@@ -8,5 +8,11 @@ $(document).ready ->
     # toggle class
     $('#wrapper').toggleClass 'menuDisplayed'
     return
-    
+
+  # add bootstrap classess to table
+  $('table').each ->
+    if !$(this).hasClass('table')
+      $(this).addClass 'table table-striped table-hover'
+    return
+
   return
