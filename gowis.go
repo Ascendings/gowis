@@ -19,7 +19,7 @@ func main() {
 
 	// check for errors while loading the configuration
 	if err != nil {
-
+		panic(err)
 	}
 
 	// let the user know we're running!
