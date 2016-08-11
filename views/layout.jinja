@@ -13,16 +13,16 @@
   <!-- page wrapper -->
   <div id="wrapper">
     <!-- navbar -->
-    {% include "partials/navbar.html" %}
+    {% include "partials/navbar.jinja" %}
 
     <!-- sidebar -->
-    {% include "partials/sidebar.html" %}
+    {% include "partials/sidebar.jinja" %}
 
     <!-- page content -->
     <div id="page-content-wrapper">
       <div class="container-fluid">
         <!-- flash message -->
-        {% include "partials/flash.html" %}
+        {% include "partials/flash.jinja" %}
 
         <!-- view main content -->
         {% block content %}{% endblock %}
