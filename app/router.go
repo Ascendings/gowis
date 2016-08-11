@@ -7,13 +7,7 @@ import (
 )
 
 // InitRouter - initializes the router and sets routes
-func InitRouter() *macaron.Macaron {
-	// create new router
-	m := macaron.Classic()
-
+func InitRouter(m macaron.Macaron) {
 	// define routes
 	m.Get("/", routers.WikiHome)
-
-	// return the compeleted router
-	return m
 }
