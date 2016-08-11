@@ -1,0 +1,58 @@
+// styles in regards to the navbar
+
+.navbar
+  border-radius: 0
+  background-color: #fff
+
+  .navbar-right
+    margin-right: 15px
+
+  #menu-toggle
+    float: left
+    +margin(8px 15px 8px null)
+
+  li > a,
+  .navbar-header a
+    +transition(all 200ms ease-in-out)
+
+  .dropdown-menu
+    perspective: 1000px
+    padding: 0
+    background: none
+    border: none
+    box-shadow: none
+
+    li
+      opacity: 0
+      background: #405060
+
+      a
+        +padding(7px null 5px null)
+        color: #ddd
+        font-size: 16px
+
+        &:hover
+          background: #16a085
+          color: white
+
+      @for $i from 1 through 6
+        &:nth-child(#{$i})
+          animation:
+            name: dropdown
+            duration: 300ms
+            delay: 0ms + (100 * ($i  - 1))
+            timing-function: ease-in-out
+            fill-mode: forwards
+
+#wrapper.menuDisplayed
+  #menu-toggle
+    +transform(rotateY(180deg))
+
+@keyframes dropdown
+  0%
+    opacity: 0
+    transform: rotateY(-90deg) translateY(30px)
+
+  100%
+    opacity: 1
+    transform: rotateY(0deg) translateY(0px)
