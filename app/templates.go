@@ -10,7 +10,7 @@ func InitTemplates(m macaron.Macaron) {
 	// setup the Pongo2 template engine
 	m.Use(pongo2.Pongoer(pongo2.Options{
 		Directory:  "views",
-		Extensions: []string{".tmpl"},
+		Extensions: []string{".tmpl", ".html"},
 		Charset:    "UTF-8",
 		IndentJSON: true,
 		IndentXML:  true,
