@@ -1,18 +1,22 @@
 package app
 
 import (
-  "gopkg.in/macaron.v1"
+	"gogs.ballantine.tech/gballan1/gowis/routers"
 
-  . "gogs.ballantine.tech/gballan1/gowis/routers"
+	"gopkg.in/macaron.v1"
 )
 
+// InitRouter - initializes the router and sets routes
 func InitRouter() *macaron.Macaron {
-  // craete new router
-  m := macaron.Classic()
+	// create new router
+	m := macaron.Classic()
 
-  // define routes
-  m.Get("/", Home)
+	// create wiki router
+	w := new(routers.Wiki)
 
-  // return the compeleted router
-  return m
+	// define routes
+	m.Get("/", w.Home)
+
+	// return the compeleted router
+	return m
 }
