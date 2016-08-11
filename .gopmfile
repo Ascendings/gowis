@@ -1,3 +1,7 @@
-[deps]
-gopkg.in/macaron.v1 = 
+[target]
+path = gogs.ballantine.tech/gballan1/gowis
 
+[deps]
+github.com/go-ini/ini =
+github.com/slene/blackfriday =
+gopkg.in/macaron.v1 =
