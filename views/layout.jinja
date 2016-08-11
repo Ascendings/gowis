@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<head>
+  <title>{{ title }}</title>
+  <!-- stylesheets -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/css/varrock.css" />
+  <!-- javascript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="/js/draynor.js"></script>
+<body>
+  <!-- page wrapper -->
+  <div id="wrapper">
+    <!-- navbar -->
+    {% include "partials/navbar.html" %}
+
+    <!-- sidebar -->
+    {% include "partials/sidebar.html" %}
+
+    <!-- page content -->
+    <div id="page-content-wrapper">
+      <div class="container-fluid">
+        <!-- flash message -->
+        {% include "partials/flash.html" %}
+
+        <!-- view main content -->
+        {% block content %}{% endblock %}
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
