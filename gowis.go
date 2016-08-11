@@ -17,18 +17,6 @@ func main() {
 	// initialize macaron router
 	m := macaron.Classic()
 
-	// setup the Pongo2 template engine
-	m.Use(pongo2.Pongoer(pongo2.Options{
-		Directory:  "views",
-		Extensions: []string{".tmpl", ".jinja"},
-		Charset:    "UTF-8",
-		IndentJSON: true,
-		IndentXML:  true,
-	}))
-
-	// initialize the router with routes
-	app.InitRouter(*m)
-
 	// load the config file
 	cfg, err := ini.InsensitiveLoad("./app/app.ini")
 
@@ -36,6 +24,18 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+
+	// setup the Pongo2 template engine
+	m.Use(pongo2.Pongoer(pongo2.Options{
+		Directory:  "views",
+		Extensions: []string{".jinja", ".tmpl"},
+		Charset:    "UTF-8",
+		IndentJSON: true,
+		IndentXML:  true,
+	}))
+
+	// initialize the router with routes
+	app.InitRouter(*m)
 
 	// let the user know we're running!
 	log.Println("Server is running...")
