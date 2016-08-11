@@ -1,3 +1,3 @@
 # gowis
 
-Simple wiki application built in Go (lang)
+A wiki application built in Go (lang) with the Macaron web framework
