@@ -1,2 +1,5 @@
 # ignore the generated .vendor/ directory
 .vendor/
+
+# ignore the built binary
+gowis
