@@ -5,6 +5,7 @@ import (
 )
 
 // WikiHome - home page
-func WikiHome(ctx *macaron.Context) string {
-	return "the request path is: " + ctx.Req.RequestURI
+func WikiHome(ctx *macaron.Context) {
+	ctx.Data["title"] = "Gowis"
+	ctx.HTML(200, "wiki/home")
 }
