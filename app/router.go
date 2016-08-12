@@ -9,8 +9,9 @@ import (
 // InitRouter - initializes the router and sets routes
 func InitRouter(m macaron.Macaron) {
 	// create new Wiki controller
-	w := new(controllers.Wiki)
+	w := new(controllers.WikiController)
 
 	// define routes
-	m.Get("/", w.Home).Name("home")
+	m.Get("/", w.Home).Name("wiki.home")
+	m.Get("/list", w.List).Name("wiki.list")
 }
