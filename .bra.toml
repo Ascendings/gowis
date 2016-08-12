@@ -7,8 +7,8 @@ init_cmds = [
 ]									# Commands run in start
 watch_all = true					# Watch all sub-directories
 watch_dirs = [
-	"./routers",
-	"./app"
+	"./app",
+	"./controllers"
 ]						# Directories to watch
 watch_exts = [".go", ".ini"]				# Extensions to watch
 ignore = [".git", "node_modules"] 	# Directories to exclude from watching
