@@ -1,6 +1,13 @@
 package controllers
 
-import "gopkg.in/macaron.v1"
+import (
+	"fmt"
+
+	"gopkg.in/macaron.v1"
+
+	"gogs.ballantine.tech/gballan1/gowis/app/forms"
+	"gogs.ballantine.tech/gballan1/gowis/models"
+)
 
 // WikiController - wiki controller
 type WikiController struct {
@@ -29,4 +36,21 @@ func (w WikiController) Create(ctx *macaron.Context) {
 	ctx.Data["title"] = "Create New Page | Gowis"
 	// render view
 	w.Render(ctx, "wiki/create")
+}
+
+// PostCreate - post route for creating page
+func (w WikiController) PostCreate(ctx *macaron.Context, input forms.CreatePageForm) {
+	fmt.Println("Here we are!")
+
+	// create the new page model
+	models.DB.Create(&models.Page{
+		URLSlug:     input.URLSlug,
+		PageContent: input.PageContent,
+		CreatedBy:   1,
+	})
+
+	fmt.Println("And another!")
+
+	// redirect the user
+	ctx.Redirect(ctx.URLFor("wiki.list"))
 }

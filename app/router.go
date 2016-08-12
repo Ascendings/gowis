@@ -1,6 +1,9 @@
 package app
 
 import (
+	"github.com/go-macaron/binding"
+
+	"gogs.ballantine.tech/gballan1/gowis/app/forms"
 	"gogs.ballantine.tech/gballan1/gowis/controllers"
 
 	"gopkg.in/macaron.v1"
@@ -15,4 +18,5 @@ func InitRouter(m macaron.Macaron) {
 	m.Get("/", w.Home).Name("wiki.home")
 	m.Get("/list", w.List).Name("wiki.list")
 	m.Get("/create", w.Create).Name("wiki.create")
+	m.Post("/create", binding.Bind(forms.CreatePageForm{}), w.PostCreate)
 }
