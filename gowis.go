@@ -10,6 +10,7 @@ import (
 	"gopkg.in/macaron.v1"
 
 	"gogs.ballantine.tech/gballan1/gowis/app"
+	"gogs.ballantine.tech/gballan1/gowis/models"
 )
 
 func main() {
@@ -32,7 +33,7 @@ func main() {
 	app.InitRouter(*m)
 
 	// load our DB stuff
-	app.InitDB()
+	models.InitDB()
 
 	// let the user know we're running!
 	log.Println("Server is running...")

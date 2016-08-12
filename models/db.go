@@ -1,16 +1,20 @@
-package app
+package models
 
 import (
 	"github.com/jinzhu/gorm"
-	"gogs.ballantine.tech/gballan1/gowis/models"
 	// loading SQLite dialect for gorm ORM
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
 )
 
+var (
+	// DB - gorm database engine object
+	DB *gorm.DB
+)
+
 // InitDB - sets up the database
-func InitDB() *gorm.DB {
+func InitDB() {
 	// setup our DB
-	db, dbErr := gorm.Open("sqlite3", "gowis.db")
+	DB, dbErr := gorm.Open("sqlite3", "gowis.db")
 
 	// check for DB errors
 	if dbErr != nil {
@@ -18,8 +22,5 @@ func InitDB() *gorm.DB {
 	}
 
 	// do some migrations
-	db.AutoMigrate(&models.Page{})
-
-	// return the DB object
-	return db
+	DB.AutoMigrate(&Page{})
 }
