@@ -1,14 +1,12 @@
 package controllers
 
 import (
-	"gogs.ballantine.tech/gballan1/gowis/lib"
-
 	"gopkg.in/macaron.v1"
 )
 
 // Wiki - wiki controller
 type Wiki struct {
-	*lib.Controller
+	*Controller
 }
 
 // Home - home page

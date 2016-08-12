@@ -1,4 +1,4 @@
-package lib
+package controllers
 
 import "gopkg.in/macaron.v1"
 
