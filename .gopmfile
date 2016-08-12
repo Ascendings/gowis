@@ -2,11 +2,11 @@
 path = gogs.ballantine.tech/gballan1/gowis
 
 [deps]
-github.com/slene/blackfriday = 
-gopkg.in/ini.v1 = 
+gopkg.in/ini.v1 =
 gopkg.in/macaron.v1 = 
-github.com/go-macaron/pongo2 = 
+github.com/go-macaron/pongo2 =
+github.com/golang-commonmark/markdown =
+github.com/jinzhu/gorm =
 
 [res]
 include = public
-
