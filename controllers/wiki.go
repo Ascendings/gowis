@@ -22,3 +22,11 @@ func (w WikiController) List(ctx *macaron.Context) {
 	// render view
 	w.Render(ctx, "wiki/list")
 }
+
+// Create - create new wiki page
+func (w WikiController) Create(ctx *macaron.Context) {
+	// set the title
+	ctx.Data["title"] = "Create New Page | Gowis"
+	// render view
+	w.Render(ctx, "wiki/create")
+}

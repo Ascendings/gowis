@@ -14,4 +14,5 @@ func InitRouter(m macaron.Macaron) {
 	// define routes
 	m.Get("/", w.Home).Name("wiki.home")
 	m.Get("/list", w.List).Name("wiki.list")
+	m.Get("/create", w.Create).Name("wiki.create")
 }
