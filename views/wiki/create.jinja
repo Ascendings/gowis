@@ -8,7 +8,7 @@
       <h1>Create a Page</h1>
     </div>
     <div class="panel-body">
-      <form action="/create" method="post">
+      <form action="{{ URLFor("wiki.create") }}" method="post">
         <div class="form-group">
           <label for="urlSlug"><u>URL Slug:</u></label>
           <div class="input-group">
@@ -27,8 +27,8 @@
         <div class="row bottom-links">
           <div class="col-sm-12">
             <button type="submit" class="btn btn-primary">Create Page</button>
-            <a class="btn btn-default" href="/">Home</a>
-            <a class="btn btn-default" href="/list">Pages</a>
+            <a class="btn btn-default" href="{{ URLFor("wiki.home") }}">Home</a>
+            <a class="btn btn-default" href="{{ URLFor("wiki.list") }}">Pages</a>
           </div>
         </div>
       </form>
