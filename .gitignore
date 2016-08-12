@@ -1,5 +1,24 @@
-# ignore the generated .vendor/ directory
+# ignore the installed vendor files
 .vendor/
 
 # ignore the built binary
 gowis
+
+# we don't need to sync the DB and log files
+*.db
+*.log
+data/
+log/
+
+# Some other recommended stuff to ignore
+.DS_Store
+custom/
+.idea/
+*.iml
+public/img/avatar/
+*.exe
+*.exe~
+profile/
+*.pem
+output*
+/release
