@@ -8,6 +8,7 @@ github.com/go-macaron/pongo2 =
 github.com/golang-commonmark/markdown = 
 github.com/jinzhu/gorm = 
 github.com/go-macaron/binding = 
+github.com/mattn/go-sqlite3 = 
 
 [res]
 include = public
