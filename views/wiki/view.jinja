@@ -12,8 +12,8 @@
     </div>
     <div class="row bottom-links">
       <div class="col-sm-12">
-        <a class="btn btn-default" href="/">Home</a>
-        <a class="btn btn-default" href="/edit/">Edit</a>
+        <a class="btn btn-default" href="{{ URLFor("wiki.home") }}">Home</a>
+        <a class="btn btn-default" href="{{ URLFor("wiki.edit", ":urlSlug", page.URLSlug) }}">Edit</a>
       </div>
     </div>
   </div>
