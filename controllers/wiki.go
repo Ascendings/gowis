@@ -116,3 +116,32 @@ func (w WikiController) Edit(ctx *macaron.Context) {
 	// render the view
 	w.Render(ctx, "wiki/edit")
 }
+
+// PostEdit - post backend for editing a page
+func (w WikiController) PostEdit(ctx *macaron.Context, input forms.CreatePageForm) {
+	// Page model
+	page := models.Page{URLSlug: ctx.Params("urlSlug")}
+
+	// find the page
+	err := models.DB.Read(&page, "u_r_l_slug")
+	// check for errors
+	if err == orm.ErrNoRows {
+		panic("No result found.")
+	} else if err == orm.ErrMissPK {
+		panic("No primary key found.")
+	}
+
+	// change the page attributes
+	page.URLSlug = input.URLSlug
+	page.PageContent = input.PageContent
+
+	// update the record
+	_, err = models.DB.Update(&page)
+	// check for errors
+	if err != nil {
+		panic(err)
+	}
+
+	// redirect the user
+	ctx.Redirect(ctx.URLFor("wiki.view", ":urlSlug", page.URLSlug))
+}
