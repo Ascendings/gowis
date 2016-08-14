@@ -19,4 +19,5 @@ func InitRouter(m macaron.Macaron) {
 	m.Get("/list", w.List).Name("wiki.list")
 	m.Get("/create", w.Create).Name("wiki.create")
 	m.Post("/create", binding.Bind(forms.CreatePageForm{}), w.PostCreate)
+	m.Get("/view/:urlSlug", w.View).Name("wiki.view")
 }

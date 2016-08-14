@@ -1,0 +1,22 @@
+{% extends "../layout.jinja" %}
+
+{% block content %}
+
+<div class="row">
+  <div class="col-sm-12 panel panel-default">
+    <div class="panel-heading">
+      <h1>{{ page.URLSlug }}</h1>
+    </div>
+    <div class="panel-body">
+      {{ convertedPageContent|safe }}
+    </div>
+    <div class="row bottom-links">
+      <div class="col-sm-12">
+        <a class="btn btn-default" href="/">Home</a>
+        <a class="btn btn-default" href="/edit/">Edit</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
