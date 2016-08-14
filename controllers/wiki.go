@@ -93,3 +93,26 @@ func (w WikiController) View(ctx *macaron.Context) {
 	// render the view
 	w.Render(ctx, "wiki/view")
 }
+
+// Edit - edit a page
+func (w WikiController) Edit(ctx *macaron.Context) {
+	// Page model
+	page := models.Page{URLSlug: ctx.Params("urlSlug")}
+
+	// find the page
+	err := models.DB.Read(&page, "u_r_l_slug")
+	// check for errors
+	if err == orm.ErrNoRows {
+		panic("No result found.")
+	} else if err == orm.ErrMissPK {
+		panic("No primary key found.")
+	}
+
+	// add the page result to the view
+	ctx.Data["page"] = page
+
+	// set the title
+	ctx.Data["title"] = "View Page | Gowis"
+	// render the view
+	w.Render(ctx, "wiki/edit")
+}
