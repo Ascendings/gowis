@@ -1,9 +1,7 @@
 package controllers
 
 import (
-	"fmt"
-
-	"gopkg.in/macaron.v1"
+	macaron "gopkg.in/macaron.v1"
 
 	"gogs.ballantine.tech/gballan1/gowis/app/forms"
 	"gogs.ballantine.tech/gballan1/gowis/models"
@@ -24,6 +22,17 @@ func (w WikiController) Home(ctx *macaron.Context) {
 
 // List - wiki pages
 func (w WikiController) List(ctx *macaron.Context) {
+	// pages array
+	var pages []models.Page
+
+	// get pages from the DB
+	qs := models.DB.QueryTable("page")
+	// order the results and put them into the array
+	qs.OrderBy("-created_at").All(&pages)
+
+	// add the pages to the view context
+	ctx.Data["pages"] = pages
+
 	// set the title
 	ctx.Data["title"] = "List of Pages | Gowis"
 	// render view
@@ -40,16 +49,20 @@ func (w WikiController) Create(ctx *macaron.Context) {
 
 // PostCreate - post route for creating page
 func (w WikiController) PostCreate(ctx *macaron.Context, input forms.CreatePageForm) {
-	fmt.Println("Here we are!")
+	// Page model
+	page := new(models.Page)
 
-	// create the new page model
-	models.DB.Create(&models.Page{
-		URLSlug:     input.URLSlug,
-		PageContent: input.PageContent,
-		CreatedBy:   1,
-	})
+	// set the page attributes
+	page.URLSlug = input.URLSlug
+	page.PageContent = input.PageContent
+	page.CreatedBy = 1
 
-	fmt.Println("And another!")
+	// save the page
+	_, err := models.DB.Insert(page)
+	// check for errors
+	if err != nil {
+		panic(err)
+	}
 
 	// redirect the user
 	ctx.Redirect(ctx.URLFor("wiki.list"))

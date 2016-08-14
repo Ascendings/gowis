@@ -7,10 +7,10 @@ import (
 
 	"github.com/go-macaron/pongo2"
 
-	"gopkg.in/macaron.v1"
-
 	"gogs.ballantine.tech/gballan1/gowis/app"
 	"gogs.ballantine.tech/gballan1/gowis/models"
+
+	macaron "gopkg.in/macaron.v1"
 )
 
 func main() {
@@ -32,7 +32,7 @@ func main() {
 	// initialize the router with routes
 	app.InitRouter(*m)
 
-	// load our DB stuff
+	// create DB connection
 	models.InitDB()
 
 	// let the user know we're running!

@@ -2,17 +2,20 @@ package models
 
 import (
 	"fmt"
+	"time"
 
+	"github.com/astaxie/beego/orm"
 	"github.com/golang-commonmark/markdown"
-	"github.com/jinzhu/gorm"
 )
 
 // Page - wiki page model
 type Page struct {
-	gorm.Model
-	URLSlug     string
-	PageContent string
+	ID          int    `orm:"pk;auto"`
+	URLSlug     string `orm:"unique"`
+	PageContent string `orm:"type(text)"`
 	CreatedBy   int
+	CreatedAt   time.Time `orm:"auto_now_add;type(datetime)"`
+	UpdatedAt   time.Time `orm:"auto_now;type(datetime)"`
 }
 
 // String - string representation of page
@@ -28,4 +31,9 @@ func (p *Page) ConvertPageContent() string {
 		markdown.Breaks(true))
 	// return converted converted content
 	return md.RenderToString([]byte(p.PageContent))
+}
+
+// registers model with DB
+func init() {
+	orm.RegisterModel(new(Page))
 }
