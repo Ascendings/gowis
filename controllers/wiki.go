@@ -50,19 +50,18 @@ func (w WikiController) Create(ctx *macaron.Context) {
 
 // PostCreate - post route for creating page
 func (w WikiController) PostCreate(ctx *macaron.Context, input wiki.PageForm) {
-	// Page model
-	page := new(models.Page)
-
 	// validate form Data
 	input.Validate()
 	// check for validation errors
 	if input.HasErrors() {
 		errors := input.GetErrors()
-
 		ctx.Data["errors"] = errors
 
 		w.Render(ctx, "wiki/create")
 	} else {
+		// Page model
+		page := new(models.Page)
+
 		// set the page attributes
 		page.URLSlug = input.URLSlug
 		page.PageContent = input.PageContent
@@ -121,6 +120,7 @@ func (w WikiController) Edit(ctx *macaron.Context) {
 
 	// add the page result to the view
 	ctx.Data["page"] = page
+	ctx.Data["oldslug"] = ctx.Params("urlSlug")
 
 	// set the title
 	ctx.Data["title"] = "View Page | Gowis"
@@ -146,13 +146,27 @@ func (w WikiController) PostEdit(ctx *macaron.Context, input wiki.PageForm) {
 	page.URLSlug = input.URLSlug
 	page.PageContent = input.PageContent
 
-	// update the record
-	_, err = models.DB.Update(&page)
-	// check for errors
-	if err != nil {
-		panic(err)
-	}
+	// validate form data
+	input.Validate()
+	// check for validation errors
+	if input.HasErrors() {
+		errors := input.GetErrors()
 
-	// redirect the user
-	ctx.Redirect(ctx.URLFor("wiki.view", ":urlSlug", page.URLSlug))
+		ctx.Data["errors"] = errors
+
+		ctx.Data["page"] = page
+		ctx.Data["oldslug"] = ctx.Params("urlSlug")
+
+		w.Render(ctx, "wiki/edit")
+	} else {
+		// update the record
+		_, err = models.DB.Update(&page)
+		// check for errors
+		if err != nil {
+			panic(err)
+		}
+
+		// redirect the user
+		ctx.Redirect(ctx.URLFor("wiki.view", ":urlSlug", page.URLSlug))
+	}
 }
