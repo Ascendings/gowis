@@ -9,7 +9,8 @@ watch_all = true					# Watch all sub-directories
 watch_dirs = [
 	"./app",
 	"./controllers",
-	"./models"
+	"./models",
+	"./modules"
 ]						# Directories to watch
 watch_exts = [".go", ".ini"]				# Extensions to watch
 ignore = [".git", "node_modules"] 	# Directories to exclude from watching
