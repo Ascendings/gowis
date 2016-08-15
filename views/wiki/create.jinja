@@ -9,20 +9,34 @@
     </div>
     <div class="panel-body">
       <form action="{{ URLFor("wiki.create") }}" method="post">
-        <div class="form-group">
+        <div class="form-group {% if errors.urlSlug %}has-error{% endif %}">
           <label for="urlSlug"><u>URL Slug:</u></label>
           <div class="input-group">
             <span class="input-group-addon">Gowis</span>
             <input type="text" class="form-control" id="urlSlug" name="url_slug" placeholder="url-slug">
           </div>
+          {% if errors.urlSlug %}
+            <ul>
+              {% for error in errors.urlSlug %}
+                <li><span class="help-block">{{ error }}</span></li>
+              {% endfor %}
+            </ul>
+          {% endif %}
         </div>
         <div class="form-group">
           <label for="pageContent"><u>Page Content:</u></label>
           <textarea name="page_content" id="pageContent" rows="14" class="form-control" placeholder="Put your markdown content here..."></textarea>
         </div>
-        <div class="form-group">
+        <div class="form-group {% if errors.commitMessage %}has-error{% endif %}">
           <label for="commitMessage"><u>Message:</u></label>
           <input type="text" class="form-control" id="commitMessage" name="commit_message" placeholder="commit-message" value="created page" />
+          {% if errors.commitMessage %}
+            <ul>
+              {% for error in errors.commitMessage %}
+                <li><span class="help-block">{{ error }}</span></li>
+              {% endfor %}
+            </ul>
+          {% endif %}
         </div>
         <div class="row bottom-links">
           <div class="col-sm-12">

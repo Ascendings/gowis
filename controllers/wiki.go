@@ -1,11 +1,15 @@
 package controllers
 
 import (
+	"fmt"
+	"strings"
+
 	"github.com/astaxie/beego/orm"
 	macaron "gopkg.in/macaron.v1"
 
-	"gogs.ballantine.tech/gballan1/gowis/app/forms"
 	"gogs.ballantine.tech/gballan1/gowis/models"
+	"gogs.ballantine.tech/gballan1/gowis/modules/base"
+	"gogs.ballantine.tech/gballan1/gowis/modules/wiki"
 )
 
 // WikiController - wiki controller
@@ -49,24 +53,48 @@ func (w WikiController) Create(ctx *macaron.Context) {
 }
 
 // PostCreate - post route for creating page
-func (w WikiController) PostCreate(ctx *macaron.Context, input forms.CreatePageForm) {
+func (w WikiController) PostCreate(ctx *macaron.Context, input wiki.PageForm) {
 	// Page model
 	page := new(models.Page)
 
-	// set the page attributes
-	page.URLSlug = input.URLSlug
-	page.PageContent = input.PageContent
-	page.CreatedBy = 1
+	// validate form Data
+	valid := input.Validate()
+	// check for validation errors
+	if valid.HasErrors() {
+		errors := make(map[string][]string)
+		errors["urlSlug"] = make([]string, 0)
+		errors["commitMessage"] = make([]string, 0)
+		for _, err := range valid.Errors {
+			if strings.HasPrefix(err.Key, "urlslug") {
+				errors["urlSlug"] = base.Append(errors["urlSlug"], err.Message)
+			} else if strings.HasPrefix(err.Key, "commitmessage") {
+				errors["commitMessage"] = base.Append(errors["commitMessage"], err.Message)
+			}
+		}
 
-	// save the page
-	_, err := models.DB.Insert(page)
-	// check for errors
-	if err != nil {
-		panic(err)
+		for key, value := range errors {
+			fmt.Println("Key:", key, "Value:", value)
+		}
+
+		ctx.Data["errors"] = errors
+
+		w.Render(ctx, "wiki/create")
+	} else {
+		// set the page attributes
+		page.URLSlug = input.URLSlug
+		page.PageContent = input.PageContent
+		page.CreatedBy = 1
+
+		// save the page
+		_, err := models.DB.Insert(page)
+		// check for errors
+		if err != nil {
+			panic(err)
+		}
+
+		// redirect the user
+		ctx.Redirect(ctx.URLFor("wiki.list"))
 	}
-
-	// redirect the user
-	ctx.Redirect(ctx.URLFor("wiki.list"))
 }
 
 // View - view a wiki page
@@ -118,7 +146,7 @@ func (w WikiController) Edit(ctx *macaron.Context) {
 }
 
 // PostEdit - post backend for editing a page
-func (w WikiController) PostEdit(ctx *macaron.Context, input forms.CreatePageForm) {
+func (w WikiController) PostEdit(ctx *macaron.Context, input wiki.PageForm) {
 	// Page model
 	page := models.Page{URLSlug: ctx.Params("urlSlug")}
 
