@@ -1,13 +1,10 @@
 package controllers
 
 import (
-	"strings"
-
 	"github.com/astaxie/beego/orm"
 	macaron "gopkg.in/macaron.v1"
 
 	"gogs.ballantine.tech/gballan1/gowis/models"
-	"gogs.ballantine.tech/gballan1/gowis/modules/base"
 	"gogs.ballantine.tech/gballan1/gowis/modules/wiki"
 )
 
@@ -57,19 +54,10 @@ func (w WikiController) PostCreate(ctx *macaron.Context, input wiki.PageForm) {
 	page := new(models.Page)
 
 	// validate form Data
-	valid := input.Validate()
+	input.Validate()
 	// check for validation errors
-	if valid.HasErrors() {
-		errors := make(map[string][]string)
-		errors["urlSlug"] = make([]string, 0)
-		errors["commitMessage"] = make([]string, 0)
-		for _, err := range valid.Errors {
-			if strings.HasPrefix(err.Key, "urlslug") {
-				errors["urlSlug"] = base.Append(errors["urlSlug"], err.Message)
-			} else if strings.HasPrefix(err.Key, "commitmessage") {
-				errors["commitMessage"] = base.Append(errors["commitMessage"], err.Message)
-			}
-		}
+	if input.HasErrors() {
+		errors := input.GetErrors()
 
 		ctx.Data["errors"] = errors
 

@@ -2,25 +2,29 @@ package wiki
 
 import (
 	"github.com/astaxie/beego/validation"
+	"github.com/fatih/structs"
+
+	"gogs.ballantine.tech/gballan1/gowis/modules/web"
 )
 
 // PageForm - form used for creating a page
 type PageForm struct {
+	web.Form
 	URLSlug       string `form:"url_slug"`
 	PageContent   string `form:"page_content"`
 	CommitMessage string `form:"commit_message"`
 }
 
 // Validate - validates the form data
-func (cf *PageForm) Validate() validation.Validation {
+func (cf *PageForm) Validate() {
+	// set our fields
+	cf.Fields = structs.Fields(&PageForm{})
+
 	// create new validation object
-	valid := validation.Validation{}
+	cf.Valid = validation.Validation{}
 
 	// add rules
-	valid.Required(cf.URLSlug, "urlslug").Message("URL slug is required")
-	valid.MinSize(cf.URLSlug, 2, "urlslugmin").Message("URL slug must be at least 2 characters long")
-	valid.Required(cf.CommitMessage, "commitmessage").Message("A commit message is required")
-
-	// return the validation result
-	return valid
+	cf.Valid.Required(cf.URLSlug, "urlslug").Message("URL slug is required")
+	cf.Valid.MinSize(cf.URLSlug, 2, "urlslugmin").Message("URL slug must be at least 2 characters long")
+	cf.Valid.Required(cf.CommitMessage, "commitmessage").Message("A commit message is required")
 }
