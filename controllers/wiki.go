@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"fmt"
 	"strings"
 
 	"github.com/astaxie/beego/orm"
@@ -70,10 +69,6 @@ func (w WikiController) PostCreate(ctx *macaron.Context, input wiki.PageForm) {
 			} else if strings.HasPrefix(err.Key, "commitmessage") {
 				errors["commitMessage"] = base.Append(errors["commitMessage"], err.Message)
 			}
-		}
-
-		for key, value := range errors {
-			fmt.Println("Key:", key, "Value:", value)
 		}
 
 		ctx.Data["errors"] = errors
