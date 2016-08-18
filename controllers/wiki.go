@@ -85,7 +85,7 @@ func (w WikiController) View(ctx *macaron.Context) {
 	page := models.Page{URLSlug: ctx.Params("urlSlug")}
 
 	// find the page
-	err := models.DB.Read(&page, "u_r_l_slug")
+	err := models.DB.Read(&page, "url_slug")
 	// check for errors
 	if err == orm.ErrNoRows {
 		panic("No result found.")
@@ -110,7 +110,7 @@ func (w WikiController) Edit(ctx *macaron.Context) {
 	page := models.Page{URLSlug: ctx.Params("urlSlug")}
 
 	// find the page
-	err := models.DB.Read(&page, "u_r_l_slug")
+	err := models.DB.Read(&page, "url_slug")
 	// check for errors
 	if err == orm.ErrNoRows {
 		panic("No result found.")
@@ -134,7 +134,7 @@ func (w WikiController) PostEdit(ctx *macaron.Context, input wiki.PageForm) {
 	page := models.Page{URLSlug: ctx.Params("urlSlug")}
 
 	// find the page
-	err := models.DB.Read(&page, "u_r_l_slug")
+	err := models.DB.Read(&page, "url_slug")
 	// check for errors
 	if err == orm.ErrNoRows {
 		panic("No result found.")

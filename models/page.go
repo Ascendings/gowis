@@ -10,8 +10,8 @@ import (
 
 // Page - wiki page model
 type Page struct {
-	ID          int    `orm:"pk;auto"`
-	URLSlug     string `orm:"unique"`
+	ID          int    `orm:"pk;auto;column(id)"`
+	URLSlug     string `orm:"unique;column(url_slug)"`
 	PageContent string `orm:"type(text)"`
 	CreatedBy   int
 	CreatedAt   time.Time `orm:"auto_now_add;type(datetime)"`
