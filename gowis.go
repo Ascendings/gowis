@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"strings"
 
+	"github.com/go-macaron/cache"
 	"github.com/go-macaron/pongo2"
 
 	"gogs.ballantine.tech/gballan1/gowis/app"
@@ -19,6 +20,9 @@ func main() {
 
 	// load our configuration
 	cfg := app.InitConfig()
+
+	// integrate macaron's caching module
+	m.Use(cache.Cacher())
 
 	// setup the Pongo2 template engine
 	m.Use(pongo2.Pongoer(pongo2.Options{

@@ -2,14 +2,15 @@
 path = gogs.ballantine.tech/gballan1/gowis
 
 [deps]
-gopkg.in/ini.v1 =
-gopkg.in/macaron.v1 =
+github.com/astaxie/beego/orm =
+github.com/astaxie/beego/validation =
+github.com/go-macaron/binding =
+github.com/go-macaron/cache =
 github.com/go-macaron/pongo2 =
 github.com/golang-commonmark/markdown =
-github.com/go-macaron/binding =
 github.com/mattn/go-sqlite3 =
-github.com/astaxie/beego/orm =
-github.com/astaxie/beego/validation = 
+gopkg.in/ini.v1 =
+gopkg.in/macaron.v1 =
 
 [res]
 include = public
