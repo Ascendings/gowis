@@ -3,7 +3,7 @@ package controllers
 import (
 	"github.com/astaxie/beego/orm"
 	"github.com/go-macaron/session"
-	macaron "gopkg.in/macaron.v1"
+	"gopkg.in/macaron.v1"
 
 	"gogs.ballantine.tech/gballan1/gowis/models"
 	"gogs.ballantine.tech/gballan1/gowis/modules/wiki"

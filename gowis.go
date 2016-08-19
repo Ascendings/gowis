@@ -12,7 +12,7 @@ import (
 	"gogs.ballantine.tech/gballan1/gowis/app"
 	"gogs.ballantine.tech/gballan1/gowis/models"
 
-	macaron "gopkg.in/macaron.v1"
+	"gopkg.in/macaron.v1"
 )
 
 func main() {
