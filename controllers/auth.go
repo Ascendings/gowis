@@ -16,3 +16,8 @@ func (a *AuthController) Login(ctx *macaron.Context) {
   // render the view
   a.Render(ctx, "auth/login")
 }
+
+// PostLogin - login backend
+func (a *AuthController) PostLogin(ctx *macaron.Context, input wiki.PageForm, f *session.Flash) {
+
+}

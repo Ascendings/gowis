@@ -4,6 +4,7 @@ import (
 	"github.com/go-macaron/binding"
 
 	"gogs.ballantine.tech/gballan1/gowis/controllers"
+	"gogs.ballantine.tech/gballan1/gowis/modules/auth"
 	"gogs.ballantine.tech/gballan1/gowis/modules/wiki"
 
 	"gopkg.in/macaron.v1"
@@ -25,5 +26,5 @@ func InitRouter(m macaron.Macaron) {
 	m.Get("/view/:urlSlug", w.View).Name("wiki.view")
 	m.Combo("/edit/:urlSlug").Get(w.Edit).Post(bindIgnErr(wiki.PageForm{}), w.PostEdit).Name("wiki.edit")
 
-	m.Combo("/login").Get(a.Login).Name("auth.login")
+	m.Combo("/login").Get(a.Login).Post(bindIgnErr(auth.LoginForm{}), a.PostLogin).Name("auth.login")
 }
