@@ -15,6 +15,8 @@ func InitRouter(m macaron.Macaron) {
 
 	// create new Wiki controller
 	w := new(controllers.WikiController)
+	// new Auth controller
+	a := new(controllers.AuthController)
 
 	// define routes
 	m.Get("/", w.Home).Name("wiki.home")
@@ -22,4 +24,6 @@ func InitRouter(m macaron.Macaron) {
 	m.Combo("/create").Get(w.Create).Post(bindIgnErr(wiki.PageForm{}), w.PostCreate).Name("wiki.create")
 	m.Get("/view/:urlSlug", w.View).Name("wiki.view")
 	m.Combo("/edit/:urlSlug").Get(w.Edit).Post(bindIgnErr(wiki.PageForm{}), w.PostEdit).Name("wiki.edit")
+
+	m.Combo("/login").Get(a.Login).Name("auth.login")
 }
