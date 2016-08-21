@@ -1,6 +1,7 @@
 package models
 
 import (
+  "bytes"
   "fmt"
   "time"
 
@@ -44,8 +45,13 @@ func (u User) HashPassword(password string) string {
     panic(err)
   }
 
+  // get the length of the byte array
+  n := bytes.IndexByte(hashedPassword, 0)
+  // get the string from the byte array
+  passwordHash := string(hashedPassword[:n])
+
   // return hashedPassword
-  return hashedPassword
+  return passwordHash
 }
 
 // registers model with DB

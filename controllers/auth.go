@@ -1,6 +1,10 @@
 package controllers
 
 import (
+  "github.com/go-macaron/session"
+
+  "gogs.ballantine.tech/gballan1/gowis/modules/wiki"
+
   "gopkg.in/macaron.v1"
 )
 

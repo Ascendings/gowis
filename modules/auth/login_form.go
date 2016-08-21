@@ -10,8 +10,8 @@ import (
 // LoginForm - form used for creating a page
 type LoginForm struct {
   web.Form
-  indetifier string `form:"identifier"`
-  password   string `form:"password"`
+  Identifier string `form:"identifier"`
+  Password   string `form:"password"`
 }
 
 // Validate - validates the form data
@@ -23,6 +23,6 @@ func (lf *LoginForm) Validate() {
   lf.Valid = validation.Validation{}
 
   // add rules
-  lf.Valid.Required(lf.URLSlug, "urlslug").Message("URL slug is required")
-  lf.Valid.Required(lf.CommitMessage, "commitmessage").Message("A commit message is required")
+  lf.Valid.Required(lf.Identifier, "identifier").Message("Email or username is required")
+  lf.Valid.Required(lf.Password, "password").Message("Your password is required")
 }
