@@ -1,0 +1,107 @@
+{% extends "../layout.jinja" %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-sm-12 panel panel-default">
+      <div class="panel-heading">
+        <h1>Register Account</h1>
+      </div>
+      <div class="panel-body">
+        <form action="{{ URLFor("auth.register") }}" method="post">
+          <div class="form-group {% if errors.email %}has-error{% endif %}">
+            <label for="email">Email</label>
+            <input id="email" class="form-control" name="email" type="email" placeholder="you@example.com" value="{{ input.Email }}">
+            {% if errors.email %}
+              <ul>
+                {% for error in errors.email %}
+                  <li><span class="help-block">{{ error }}</span></li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          </div>
+
+          <div class="form-group {% if errors.emailagain %}has-error{% endif %}">
+            <label for="email_again">Confirm Email</label>
+            <input id="email_again" class="form-control" name="email_again" type="email" placeholder="you@example.com" value="{{ input.EmailAgain }}">
+            {% if errors.emailagain %}
+              <ul>
+                {% for error in errors.emailagain %}
+                  <li><span class="help-block">{{ error }}</span></li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          </div>
+
+          <div class="form-group {% if errors.username %}has-error{% endif %}">
+            <label for="username">Username</label>
+            <input id="username" class="form-control" name="username" type="text" placeholder="username" value="{{ input.Username }}">
+            {% if errors.username %}
+              <ul>
+                {% for error in errors.username %}
+                  <li><span class="help-block">{{ error }}</span></li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          </div>
+
+          <div class="form-group {% if errors.password %}has-error{% endif %}">
+            <label for="password">Password</label>
+            <input id="password" class="form-control" name="password" type="password">
+            {% if errors.password %}
+              <ul>
+                {% for error in errors.password %}
+                  <li><span class="help-block">{{ error }}</span></li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          </div>
+
+          <div class="form-group {% if errors.passwordagain %}has-error{% endif %}">
+            <label for="password_again">Confirm Password</label>
+            <input id="password_again" class="form-control" name="password_again" type="password">
+            {% if errors.passwordagain %}
+              <ul>
+                {% for error in errors.passwordagain %}
+                  <li><span class="help-block">{{ error }}</span></li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          </div>
+
+          <div class="form-group {% if errors.firstname %}has-error{% endif %}">
+            <label for="first_name">First name</label>
+            <input id="first_name" class="form-control" name="first_name" type="text" placeholder="Bob" value="{{ input.FirstName }}">
+            {% if errors.firstname %}
+              <ul>
+                {% for error in errors.firstname %}
+                  <li><span class="help-block">{{ error }}</span></li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          </div>
+
+          <div class="form-group {% if errors.lastname %}has-error{% endif %}">
+            <label for="last_name">Last name</label>
+            <input id="last_name" class="form-control" name="last_name" type="text" placeholder="Bobbington" value="{{ input.LastName }}">
+            {% if errors.lastname %}
+              <ul>
+                {% for error in errors.lastname %}
+                  <li><span class="help-block">{{ error }}</span></li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          </div>
+
+          <button class="btn btn-primary">
+            <span class="glyphicon glyphicon-send"></span> Register
+          </button>
+        </form>
+      </div>
+      <div class="row bottom-links">
+        <div class="col-sm-12">
+          <p>Already have an account? Go <a href="/login">login</a> then.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

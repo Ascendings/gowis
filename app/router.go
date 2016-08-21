@@ -26,5 +26,6 @@ func InitRouter(m macaron.Macaron) {
 	m.Get("/view/:urlSlug", w.View).Name("wiki.view")
 	m.Combo("/edit/:urlSlug").Get(w.Edit).Post(bindIgnErr(wiki.PageForm{}), w.PostEdit).Name("wiki.edit")
 
+	m.Combo("/register").Get(a.Register).Post(bindIgnErr(auth.RegisterForm{}), a.PostRegister).Name("auth.register")
 	m.Combo("/login").Get(a.Login).Post(bindIgnErr(auth.LoginForm{}), a.PostLogin).Name("auth.login")
 }
