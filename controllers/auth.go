@@ -78,28 +78,41 @@ func (a *AuthController) Login(ctx *macaron.Context) {
 
 // PostLogin - login backend
 func (a *AuthController) PostLogin(ctx *macaron.Context, input auth.LoginForm, f *session.Flash) {
+	// boolean to determine whether or not login was successful
+	fail := false
+
 	// User model with the email set
-	user := models.User{Email: ctx.Params("identifier")}
+	user := models.User{Email: input.Identifier}
 
 	// find the user by email
 	emailErr := models.DB.Read(&user, "email")
 	// check for errors
 	if emailErr == orm.ErrNoRows || emailErr == orm.ErrMissPK {
 		// user model with the username set
-		user = models.User{Username: ctx.Params("identifier")}
+		user = models.User{Username: input.Identifier}
 
 		// find the user by username
 		usernameErr := models.DB.Read(&user, "username")
 		// check for errors
 		if usernameErr == orm.ErrNoRows || usernameErr == orm.ErrMissPK {
-			f.Error("Invalid credentials", false)
-			// redirect the user
-			ctx.Redirect(ctx.URLFor("auth.login"))
+			// set fail to true
+			fail = true
 		}
+	}
+
+	if !fail {
+		fail = !user.CheckPassword(input.Password)
+	}
+
+	if fail {
+		// flash failure message to the user
+		f.Error("Invalid credentials", false)
+		// redirect the user
+		ctx.Redirect(ctx.URLFor("auth.login"))
 	} else {
-		// set the title
-		f.Success("Successful login", false)
-		// render the view
+		// flash a success message
+		f.Success("You have logged in successfully!", false)
+		// redirect the user
 		ctx.Redirect(ctx.URLFor("wiki.list"))
 	}
 }
