@@ -51,6 +51,19 @@ func (u User) HashPassword(password string) string {
 	return passwordHash
 }
 
+// CheckPassword - checks the provided password against this user's hash
+func (u *User) CheckPassword(password string) bool {
+	err := bcrypt.CompareHashAndPassword([]byte(u.Password), []byte(password))
+
+	if err != nil {
+		// return false if there was an error
+		return false
+	}
+
+	// return true if the check succeeded
+	return true
+}
+
 // registers model with DB
 func init() {
 	orm.RegisterModel(new(User))
