@@ -14,7 +14,7 @@ type User struct {
 	ID           int       `orm:"pk;auto;column(id)"`
 	Email        string    `orm:"size(150)"`
 	Username     string    `orm:"unique"`
-	Password     string    `orm:"size(128)"`
+	Password     string    `orm:"size(160)"`
 	PasswordSalt string    `orm:"size(12)"`
 	FirstName    string    `orm:"null"`
 	LastName     string    `orm:"null"`
