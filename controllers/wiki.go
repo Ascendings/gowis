@@ -23,7 +23,7 @@ func (w WikiController) Home(ctx *macaron.Context) {
 }
 
 // List - wiki pages
-func (w WikiController) List(ctx *macaron.Context) {
+func (w WikiController) List(ctx *macaron.Context, sess session.Store) {
 	// pages array
 	var pages []models.Page
 

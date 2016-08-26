@@ -77,7 +77,7 @@ func (a *AuthController) Login(ctx *macaron.Context) {
 }
 
 // PostLogin - login backend
-func (a *AuthController) PostLogin(ctx *macaron.Context, input auth.LoginForm, f *session.Flash) {
+func (a *AuthController) PostLogin(ctx *macaron.Context, input auth.LoginForm, f *session.Flash, sess session.Store) {
 	// boolean to determine whether or not login was successful
 	fail := false
 
@@ -110,6 +110,9 @@ func (a *AuthController) PostLogin(ctx *macaron.Context, input auth.LoginForm, f
 		// redirect the user
 		ctx.Redirect(ctx.URLFor("auth.login"))
 	} else {
+		// set the user id in the session - the user object will be instated on next request
+		sess.Set("user_id", user.ID)
+
 		// flash a success message
 		f.Success("You have logged in successfully!", false)
 		// redirect the user

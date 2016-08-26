@@ -5,6 +5,7 @@ import (
 
 	"gogs.ballantine.tech/gballan1/gowis/controllers"
 	"gogs.ballantine.tech/gballan1/gowis/modules/auth"
+	"gogs.ballantine.tech/gballan1/gowis/modules/middleware"
 	"gogs.ballantine.tech/gballan1/gowis/modules/wiki"
 
 	"gopkg.in/macaron.v1"
@@ -21,7 +22,7 @@ func InitRouter(m macaron.Macaron) {
 
 	// define routes
 	m.Get("/", w.Home).Name("wiki.home")
-	m.Get("/list", w.List).Name("wiki.list")
+	m.Get("/list", middleware.CheckUser, w.List).Name("wiki.list")
 	m.Combo("/create").Get(w.Create).Post(bindIgnErr(wiki.PageForm{}), w.PostCreate).Name("wiki.create")
 	m.Get("/view/:urlSlug", w.View).Name("wiki.view")
 	m.Combo("/edit/:urlSlug").Get(w.Edit).Post(bindIgnErr(wiki.PageForm{}), w.PostEdit).Name("wiki.edit")
