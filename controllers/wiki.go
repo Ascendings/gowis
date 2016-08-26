@@ -84,7 +84,7 @@ func (w WikiController) PostCreate(ctx *macaron.Context, input wiki.PageForm, f 
 		// let the user know we're all good
 		f.Success("Your page was created successfully!", false)
 		// redirect the user
-		ctx.Redirect(ctx.URLFor("wiki.list"))
+		ctx.Redirect(ctx.URLFor("wiki.view", ":urlSlug", page.URLSlug))
 	}
 }
 
