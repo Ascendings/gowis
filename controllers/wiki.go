@@ -54,13 +54,17 @@ func (w WikiController) Create(ctx *macaron.Context, x csrf.CSRF) {
 }
 
 // PostCreate - post route for creating page
-func (w WikiController) PostCreate(ctx *macaron.Context, input wiki.PageForm, f *session.Flash) {
+func (w WikiController) PostCreate(ctx *macaron.Context, input wiki.PageForm, f *session.Flash, x csrf.CSRF) {
 	// validate form Data
 	input.Validate()
 	// check for validation errors
 	if input.HasErrors() {
+		// add errors to the view
 		errors := input.GetErrors()
 		ctx.Data["errors"] = errors
+
+		// add a new CSRF token to the view
+		ctx.Data["csrf_token"] = w.CreateCsrfField(x)
 
 		// let the user know that were some problems with their submission
 		f.Error("There were some problems with your submission. Please review your information", true)
@@ -147,7 +151,7 @@ func (w WikiController) Edit(ctx *macaron.Context, f *session.Flash, x csrf.CSRF
 }
 
 // PostEdit - post backend for editing a page
-func (w WikiController) PostEdit(ctx *macaron.Context, input wiki.PageForm, f *session.Flash) {
+func (w WikiController) PostEdit(ctx *macaron.Context, input wiki.PageForm, f *session.Flash, x csrf.CSRF) {
 	// Page model
 	page := models.Page{URLSlug: ctx.Params("urlSlug")}
 
@@ -169,10 +173,15 @@ func (w WikiController) PostEdit(ctx *macaron.Context, input wiki.PageForm, f *s
 		if input.HasErrors() {
 			errors := input.GetErrors()
 
+			// add errors to the view
 			ctx.Data["errors"] = errors
 
+			// add the page and old URL slug to the view
 			ctx.Data["page"] = page
 			ctx.Data["oldslug"] = ctx.Params("urlSlug")
+
+			// add a new CSRF token to the view
+			ctx.Data["csrf_token"] = w.CreateCsrfField(x)
 
 			w.Render(ctx, "wiki/edit")
 		} else {

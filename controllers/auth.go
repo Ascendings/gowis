@@ -28,14 +28,20 @@ func (a *AuthController) Register(ctx *macaron.Context, x csrf.CSRF) {
 }
 
 // PostRegister - user registration post stuff
-func (a *AuthController) PostRegister(ctx *macaron.Context, input auth.RegisterForm, f *session.Flash) {
+func (a *AuthController) PostRegister(ctx *macaron.Context, input auth.RegisterForm, f *session.Flash, x csrf.CSRF) {
 	// validate form Data
 	input.Validate()
 	// check for validation errors
 	if input.HasErrors() {
+		// add errors back to view
 		errors := input.GetErrors()
 		ctx.Data["errors"] = errors
+
+		// pass the user's input back to the view
 		ctx.Data["input"] = input
+
+		// pass a new CSRF token
+		ctx.Data["csrf_token"] = a.CreateCsrfField(x)
 
 		// let the user know that were some problems with their submission
 		f.Error("There were some problems with your submission. Please review your information", true)
