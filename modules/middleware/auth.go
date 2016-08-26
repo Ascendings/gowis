@@ -11,7 +11,7 @@ import (
 )
 
 // CheckUser - makes sure the user object is set in the session if the user_id is set
-func CheckUser(sess session.Store) {
+func CheckUser(ctx *macaron.Context, sess session.Store) {
 	// check if the user ID has been set
 	if sess.Get("user_id") != nil {
 		// check if we need to set the user object
@@ -28,6 +28,7 @@ func CheckUser(sess session.Store) {
 			} else {
 				// set the user object!
 				sess.Set("user", user)
+				ctx.Data["user"] = user
 			}
 		}
 	}
