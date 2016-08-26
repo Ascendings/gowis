@@ -22,10 +22,12 @@
               </ul>
             {% endif %}
           </div>
+
           <div class="form-group">
             <label for="pageContent"><u>Page Content:</u></label>
             <textarea name="page_content" id="pageContent" rows="14" class="form-control" placeholder="Put your markdown content here..."></textarea>
           </div>
+
           <div class="form-group {% if errors.commitmessage %}has-error{% endif %}">
             <label for="commitMessage"><u>Message:</u></label>
             <input type="text" class="form-control" id="commitMessage" name="commit_message" placeholder="commit-message" value="created page" />
@@ -37,6 +39,9 @@
               </ul>
             {% endif %}
           </div>
+
+          {{ csrf_token|safe }}
+
           <div class="row bottom-links">
             <div class="col-sm-12">
               <button type="submit" class="btn btn-primary">Create Page</button>

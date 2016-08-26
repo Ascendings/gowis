@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"github.com/astaxie/beego/orm"
+	"github.com/go-macaron/csrf"
 	"github.com/go-macaron/session"
 	"gopkg.in/macaron.v1"
 
@@ -42,7 +43,10 @@ func (w WikiController) List(ctx *macaron.Context, sess session.Store) {
 }
 
 // Create - create new wiki page
-func (w WikiController) Create(ctx *macaron.Context) {
+func (w WikiController) Create(ctx *macaron.Context, x csrf.CSRF) {
+	// add the CSRF token to the view
+	ctx.Data["csrf_token"] = w.CreateCsrfField(x)
+
 	// set the title
 	ctx.Data["title"] = "Create New Page | Gowis"
 	// render view
@@ -115,7 +119,10 @@ func (w WikiController) View(ctx *macaron.Context, f *session.Flash) {
 }
 
 // Edit - edit a page
-func (w WikiController) Edit(ctx *macaron.Context, f *session.Flash) {
+func (w WikiController) Edit(ctx *macaron.Context, f *session.Flash, x csrf.CSRF) {
+	// add the CSRF token to the view
+	ctx.Data["csrf_token"] = w.CreateCsrfField(x)
+
 	// Page model
 	page := models.Page{URLSlug: ctx.Params("urlSlug")}
 
