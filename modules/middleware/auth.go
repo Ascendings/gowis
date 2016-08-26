@@ -4,7 +4,10 @@ import (
 	"fmt"
 
 	"github.com/go-macaron/session"
+
 	"gogs.ballantine.tech/gballan1/gowis/models"
+
+	"gopkg.in/macaron.v1"
 )
 
 // CheckUser - makes sure the user object is set in the session if the user_id is set
@@ -27,5 +30,25 @@ func CheckUser(sess session.Store) {
 				sess.Set("user", user)
 			}
 		}
+	}
+}
+
+// Auth - user needs to be authenticated
+func Auth(ctx *macaron.Context, f *session.Flash, sess session.Store) {
+	if !(sess.Get("user_id") != nil) {
+		// flash a message to the user
+		f.Info("You need to be logged in to do that!")
+		// redirect the user
+		ctx.Redirect(ctx.URLFor("auth.login"))
+	}
+}
+
+// Guest - users needs to not be authenticated
+func Guest(ctx *macaron.Context, f *session.Flash, sess session.Store) {
+	if sess.Get("user_id") != nil {
+		// flash a message to the user
+		f.Info("Hold on hoss, you don't need that.")
+		// redirect the user
+		ctx.Redirect(ctx.URLFor("wiki.home"))
 	}
 }
