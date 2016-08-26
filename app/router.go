@@ -32,6 +32,7 @@ func InitRouter(m macaron.Macaron) {
 		m.Group("", func() {
 			m.Combo("/create").Get(w.Create).Post(bindIgnErr(wiki.PageForm{}), w.PostCreate).Name("wiki.create")
 			m.Combo("/edit/:urlSlug").Get(w.Edit).Post(bindIgnErr(wiki.PageForm{}), w.PostEdit).Name("wiki.edit")
+			m.Get("/logout", a.Logout).Name("auth.logout")
 		}, middleware.Auth)
 
 		// guest only routes
