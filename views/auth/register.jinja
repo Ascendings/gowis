@@ -92,6 +92,8 @@
             {% endif %}
           </div>
 
+          {{ csrf_token|safe }}
+
           <button class="btn btn-primary">
             <span class="glyphicon glyphicon-send"></span> Register
           </button>

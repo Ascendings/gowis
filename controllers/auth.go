@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"github.com/astaxie/beego/orm"
+	"github.com/go-macaron/csrf"
 	"github.com/go-macaron/session"
 
 	"gogs.ballantine.tech/gballan1/gowis/models"
@@ -16,7 +17,10 @@ type AuthController struct {
 }
 
 // Register - user registration view
-func (a *AuthController) Register(ctx *macaron.Context) {
+func (a *AuthController) Register(ctx *macaron.Context, x csrf.CSRF) {
+	// add the CSRF token to the view
+	ctx.Data["csrf_token"] = a.CreateCsrfField(x)
+
 	// set the page title
 	ctx.Data["title"] = "Register | Gowis"
 	// render the view
@@ -69,7 +73,10 @@ func (a *AuthController) PostRegister(ctx *macaron.Context, input auth.RegisterF
 }
 
 // Login - user login view
-func (a *AuthController) Login(ctx *macaron.Context) {
+func (a *AuthController) Login(ctx *macaron.Context, x csrf.CSRF) {
+	// add the CSRF token to the view
+	ctx.Data["csrf_token"] = a.CreateCsrfField(x)
+
 	// set the page title
 	ctx.Data["title"] = "Login | Gowis"
 	// render the view

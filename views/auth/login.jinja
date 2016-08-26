@@ -12,10 +12,13 @@
             <label for="identifier">Email/Username</label>
             <input id="identifier" class="form-control" name="identifier" type="text" placeholder="you@example.com">
           </div>
+
           <div class="form-group">
             <label for="password">Password</label>
             <input id="password" class="form-control" name="password" type="password" >
           </div>
+
+          {{ csrf_token|safe }}
 
           <button class="btn btn-primary">
             <span class="glyphicon glyphicon-log-in"></span> Login
