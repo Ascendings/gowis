@@ -6,6 +6,7 @@ import (
 	"strings"
 
 	"github.com/go-macaron/cache"
+	"github.com/go-macaron/csrf"
 	"github.com/go-macaron/pongo2"
 	"github.com/go-macaron/session"
 
@@ -27,6 +28,9 @@ func main() {
 
 	// integrate macaron's session module
 	m.Use(session.Sessioner())
+
+	// integrate CSRF protection stuff
+	m.Use(csrf.Csrfer())
 
 	// setup the Pongo2 template engine
 	m.Use(pongo2.Pongoer(pongo2.Options{

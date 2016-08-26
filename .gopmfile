@@ -6,6 +6,7 @@ github.com/astaxie/beego/orm =
 github.com/astaxie/beego/validation =
 github.com/go-macaron/binding =
 github.com/go-macaron/cache =
+github.com/go-macaron/csrf = 
 github.com/go-macaron/pongo2 =
 github.com/go-macaron/session =
 github.com/golang-commonmark/markdown =
