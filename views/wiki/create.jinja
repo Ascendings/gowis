@@ -12,7 +12,7 @@
             <label for="urlSlug"><u>URL Slug:</u></label>
             <div class="input-group">
               <span class="input-group-addon">Gowis</span>
-              <input type="text" class="form-control" id="urlSlug" name="url_slug" placeholder="url-slug">
+              <input type="text" class="form-control" id="urlSlug" name="url_slug" placeholder="url-slug" value="{{ input.URLSlug }}">
             </div>
             {% if errors.urlslug %}
               <ul>
@@ -25,12 +25,12 @@
 
           <div class="form-group">
             <label for="pageContent"><u>Page Content:</u></label>
-            <textarea name="page_content" id="pageContent" rows="14" class="form-control" placeholder="Put your markdown content here..."></textarea>
+            <textarea name="page_content" id="pageContent" rows="14" class="form-control" placeholder="Put your markdown content here...">{{ input.PageContent }}</textarea>
           </div>
 
           <div class="form-group {% if errors.commitmessage %}has-error{% endif %}">
             <label for="commitMessage"><u>Message:</u></label>
-            <input type="text" class="form-control" id="commitMessage" name="commit_message" placeholder="commit-message" value="created page" />
+            <input type="text" class="form-control" id="commitMessage" name="commit_message" placeholder="commit-message" value="{% if input.CommitMessage %}{{ input.CommitMessage }}{% else %}created page{% endif %}" />
             {% if errors.commitmessage %}
               <ul>
                 {% for error in errors.commitmessage %}

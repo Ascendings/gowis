@@ -63,6 +63,9 @@ func (w WikiController) PostCreate(ctx *macaron.Context, input wiki.PageForm, f 
 		errors := input.GetErrors()
 		ctx.Data["errors"] = errors
 
+		// pass the user's input back to the view
+		ctx.Data["input"] = input
+
 		// add a new CSRF token to the view
 		ctx.Data["csrf_token"] = w.CreateCsrfField(x)
 
