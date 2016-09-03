@@ -28,8 +28,12 @@ func CheckUser(ctx *macaron.Context, sess session.Store) {
 			} else {
 				// set the user object!
 				sess.Set("user", user)
+				// pass the session user object to the view
 				ctx.Data["user"] = user
 			}
+		} else {
+			// pass the session user object to the view
+			ctx.Data["user"] = sess.Get("user")
 		}
 	}
 }
