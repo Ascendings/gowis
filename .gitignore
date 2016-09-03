@@ -10,6 +10,9 @@ gowis
 data/
 log/
 
+# file-based sessions really should not be synced
+.sessions/
+
 # Some other recommended stuff to ignore
 .DS_Store
 custom/
