@@ -13,6 +13,16 @@ log/
 # file-based sessions really should not be synced
 .sessions/
 
+# NPM modules
+node_modules/
+
+# these files are dynamically generated with Grunt.js
+public/css
+public/js
+
+# SASS cache
+.sass-cache/
+
 # Some other recommended stuff to ignore
 .DS_Store
 custom/
