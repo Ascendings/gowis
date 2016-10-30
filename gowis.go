@@ -1,19 +1,19 @@
 package main
 
 import (
+	"html/template"
 	"log"
 	"net/http"
 	"strings"
 
 	"github.com/go-macaron/cache"
 	"github.com/go-macaron/csrf"
-	"github.com/go-macaron/pongo2"
 	"github.com/go-macaron/session"
+
+	macaron "gopkg.in/macaron.v1"
 
 	"gogs.ballantine.tech/gballan1/gowis/app"
 	"gogs.ballantine.tech/gballan1/gowis/models"
-
-	"gopkg.in/macaron.v1"
 )
 
 func main() {
@@ -32,13 +32,27 @@ func main() {
 	// integrate CSRF protection stuff
 	m.Use(csrf.Csrfer())
 
-	// setup the Pongo2 template engine
-	m.Use(pongo2.Pongoer(pongo2.Options{
-		Directory:  "views",
-		Extensions: []string{".jinja", ".tmpl"},
-		Charset:    "UTF-8",
+	m.Use(macaron.Renderer(macaron.RenderOptions{
+		// Directory to load templates. Default is "templates".
+		Directory: "views",
+		// Funcs is a slice of FuncMaps to apply to the template upon compilation. Default is [].
+		Funcs: []template.FuncMap{map[string]interface{}{
+			"AppName": func() string {
+				return "Macaron"
+			},
+			"AppVer": func() string {
+				return "1.0.0"
+			},
+			"URLFor": m.URLFor,
+		}},
+		// Outputs human readable JSON. Default is false.
 		IndentJSON: true,
-		IndentXML:  true,
+		// Outputs human readable XML. Default is false.
+		IndentXML: true,
+		// Prefixes the JSON output with the given bytes. Default is no prefix.
+		PrefixJSON: []byte("macaron"),
+		// Prefixes the XML output with the given bytes. Default is no prefix.
+		PrefixXML: []byte("macaron"),
 	}))
 
 	// initialize the router with routes

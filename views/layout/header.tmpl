@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-  <title>{{ title }}</title>
+  <title>{{ .title }}</title>
   <!-- stylesheets -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" />
   <link rel="stylesheet" href="/css/varrock.css" />
@@ -13,22 +13,15 @@
   <!-- page wrapper -->
   <div id="wrapper">
     <!-- navbar -->
-    {% include "partials/navbar.jinja" %}
+    {{ template "partials/navbar.tmpl" . }}
 
     <!-- sidebar -->
-    {% include "partials/sidebar.jinja" %}
+    {{ template "partials/sidebar.tmpl" . }}
 
     <!-- page content -->
     <div id="page-content-wrapper">
       <div class="container-fluid">
         <!-- flash message -->
-        {% include "partials/flash.jinja" %}
+        {{ template "partials/flash.tmpl" . }}
 
         <!-- view main content -->
-        {% block content %}{% endblock %}
-      </div>
-    </div>
-
-  </div>
-</body>
-</html>

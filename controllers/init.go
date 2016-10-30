@@ -3,7 +3,7 @@ package controllers
 import (
 	"github.com/go-macaron/csrf"
 
-	"gopkg.in/macaron.v1"
+	macaron "gopkg.in/macaron.v1"
 )
 
 // Controller - base class for controllers
@@ -16,9 +16,6 @@ func (c *Controller) CreateCsrfField(x csrf.CSRF) string {
 
 // Render - renders a view
 func (c *Controller) Render(ctx *macaron.Context, view string) {
-	// add the URLFor function to the view
-	ctx.Data["URLFor"] = ctx.URLFor
-
 	// do the view
 	ctx.HTML(200, view)
 }

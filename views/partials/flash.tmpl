@@ -1,31 +1,31 @@
-{% if Flash.InfoMsg %}
+{{ if .Flash.InfoMsg }}
   <div class="row">
     <div class="alert alert-info">
-      {{ Flash.InfoMsg }}
+      {{ .Flash.InfoMsg }}
     </div>
   </div>
-{% endif %}
+{{ end }}
 
-{% if Flash.SuccessMsg %}
+{{ if .Flash.SuccessMsg }}
   <div class="row">
     <div class="alert alert-success">
-  		{{ Flash.SuccessMsg }}
+  		{{ .Flash.SuccessMsg }}
     </div>
   </div>
-{% endif %}
+{{ end }}
 
-{% if Flash.WarningMsg %}
+{{ if .Flash.WarningMsg }}
   <div class="row">
     <div class="alert alert-warning">
-  		{{ Flash.WarningMsg }}
+  		{{ .Flash.WarningMsg }}
     </div>
   </div>
-{% endif %}
+{{ end }}
 
-{% if Flash.ErrorMsg %}
+{{ if .Flash.ErrorMsg }}
   <div class="row">
     <div class="alert alert-danger">
-      {{ Flash.ErrorMsg }}
+      {{ .Flash.ErrorMsg }}
     </div>
   </div>
-{% endif %}
+{{ end }}

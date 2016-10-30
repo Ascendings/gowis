@@ -1,0 +1,16 @@
+{{ template "layout/header.tmpl" . }}
+
+<div class="row">
+  <div class="col-sm-12 panel panel-default">
+    <div class="panel-heading">
+      <h1>List of Pages</h1>
+    </div>
+    <div class="panel-body">
+      {{ range $page := .pages }}
+        <p><a href="{{ URLFor "wiki.view" ":urlSlug" .page.URLSlug }}">{{ .page.URLSlug }}</a></p>
+      {{ end }}
+    </div>
+  </div>
+</div>
+
+{{ template "layout/footer.tmpl" .}}

@@ -8,7 +8,7 @@ import (
 	"gogs.ballantine.tech/gballan1/gowis/models"
 	"gogs.ballantine.tech/gballan1/gowis/modules/auth"
 
-	"gopkg.in/macaron.v1"
+	macaron "gopkg.in/macaron.v1"
 )
 
 // AuthController - authentication controller
