@@ -1,3 +1,4 @@
+{{ define "layout_header" }}
 <!doctype html>
 <html>
 <head>
@@ -13,15 +14,16 @@
   <!-- page wrapper -->
   <div id="wrapper">
     <!-- navbar -->
-    {{ template "partials/navbar.tmpl" . }}
+    {{ template "partials_navbar" . }}
 
     <!-- sidebar -->
-    {{ template "partials/sidebar.tmpl" . }}
+    {{ template "partials_sidebar" . }}
 
     <!-- page content -->
     <div id="page-content-wrapper">
       <div class="container-fluid">
         <!-- flash message -->
-        {{ template "partials/flash.tmpl" . }}
+        {{ template "partials_flash" . }}
 
         <!-- view main content -->
+{{ end }}

@@ -1,4 +1,4 @@
-{{ template "layout/header.tmpl" . }}
+{{ template "layout_header" . }}
 
 <div class="row">
   <div class="col-sm-12 panel panel-default">
@@ -39,6 +39,8 @@
           {{ end }}
         </div>
 
+        {{ .csrf_token }}
+
         <div class="row bottom-links">
           <div class="col-sm-12">
             <button type="submit" class="btn btn-primary">Create Page</button>
@@ -51,4 +53,4 @@
   </div>
 </div>
 
-{{ template "layout/footer.tmpl" . }}
+{{ template "layout_footer" . }}

@@ -1,31 +1,33 @@
-<div id="sidebar-wrapper">
-  <ul class="sidebar-nav">
-    <li class="sidebar-link"><a href="#">
-      <span class="sidebar-icon glyphicon glyphicon-tasks"></span>
-      <span class="sidebar-text">Stream</span>
-    </a></li>
-    <li class="sidebar-link"><a href="{{ URLFor "wiki.list" }}">
-      <span class="sidebar-icon glyphicon glyphicon-list-alt"></span>
-      <span class="sidebar-text">List of Pages</span>
-    </a></li>
-    <li class="sidebar-link"><a href="#">
-      <span class="sidebar-icon glyphicon glyphicon-user"></span>
-      <span class="sidebar-text">Account</span>
-    </a></li>
-    <li class="sidebar-link"><a href="#">
-      <span class="sidebar-icon glyphicon glyphicon-cog"></span>
-      <span class="sidebar-text">Settings</span>
-    </a></li>
-    {{ if .user }}
-      <li class="sidebar-link"><a href="{{ URLFor "auth.logout" }}">
-        <span class="sidebar-icon glyphicon glyphicon-log-out"></span>
-        <span class="sidebar-text">Logout</span>
+{{ define "partials_sidebar" }}
+  <div id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+      <li class="sidebar-link"><a href="#">
+        <span class="sidebar-icon glyphicon glyphicon-tasks"></span>
+        <span class="sidebar-text">Stream</span>
       </a></li>
-    {{ else }}
-      <li class="sidebar-link"><a href="{{ URLFor "auth.login" }}">
-        <span class="sidebar-icon glyphicon glyphicon-log-in"></span>
-        <span class="sidebar-text">Login</span>
+      <li class="sidebar-link"><a href="{{ URLFor "wiki.list" }}">
+        <span class="sidebar-icon glyphicon glyphicon-list-alt"></span>
+        <span class="sidebar-text">List of Pages</span>
       </a></li>
-    {{ end }}
-  </ul>
-</div>
+      <li class="sidebar-link"><a href="#">
+        <span class="sidebar-icon glyphicon glyphicon-user"></span>
+        <span class="sidebar-text">Account</span>
+      </a></li>
+      <li class="sidebar-link"><a href="#">
+        <span class="sidebar-icon glyphicon glyphicon-cog"></span>
+        <span class="sidebar-text">Settings</span>
+      </a></li>
+      {{ if .user }}
+        <li class="sidebar-link"><a href="{{ URLFor "auth.logout" }}">
+          <span class="sidebar-icon glyphicon glyphicon-log-out"></span>
+          <span class="sidebar-text">Logout</span>
+        </a></li>
+      {{ else }}
+        <li class="sidebar-link"><a href="{{ URLFor "auth.login" }}">
+          <span class="sidebar-icon glyphicon glyphicon-log-in"></span>
+          <span class="sidebar-text">Login</span>
+        </a></li>
+      {{ end }}
+    </ul>
+  </div>
+{{ end }}

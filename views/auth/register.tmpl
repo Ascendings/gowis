@@ -1,4 +1,4 @@
-{{ template "layout/header.tmpl" . }}
+{{ template "layout_header" . }}
 
 <div class="row">
   <div class="col-sm-12 panel panel-default">
@@ -91,7 +91,7 @@
           {{ end }}
         </div>
 
-
+        {{ .csrf_token }}
 
         <button class="btn btn-primary">
           <span class="glyphicon glyphicon-send"></span> Register
@@ -106,4 +106,4 @@
   </div>
 </div>
 
-{{ template "layout/footer.tmpl" . }}
+{{ template "layout_footer" . }}

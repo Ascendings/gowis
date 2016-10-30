@@ -1,31 +1,33 @@
-{{ if .Flash.InfoMsg }}
-  <div class="row">
-    <div class="alert alert-info">
-      {{ .Flash.InfoMsg }}
+{{ define "partials_flash" }}
+  {{ if .Flash.InfoMsg }}
+    <div class="row">
+      <div class="alert alert-info">
+        {{ .Flash.InfoMsg }}
+      </div>
     </div>
-  </div>
-{{ end }}
+  {{ end }}
 
-{{ if .Flash.SuccessMsg }}
-  <div class="row">
-    <div class="alert alert-success">
-  		{{ .Flash.SuccessMsg }}
+  {{ if .Flash.SuccessMsg }}
+    <div class="row">
+      <div class="alert alert-success">
+    		{{ .Flash.SuccessMsg }}
+      </div>
     </div>
-  </div>
-{{ end }}
+  {{ end }}
 
-{{ if .Flash.WarningMsg }}
-  <div class="row">
-    <div class="alert alert-warning">
-  		{{ .Flash.WarningMsg }}
+  {{ if .Flash.WarningMsg }}
+    <div class="row">
+      <div class="alert alert-warning">
+    		{{ .Flash.WarningMsg }}
+      </div>
     </div>
-  </div>
-{{ end }}
+  {{ end }}
 
-{{ if .Flash.ErrorMsg }}
-  <div class="row">
-    <div class="alert alert-danger">
-      {{ .Flash.ErrorMsg }}
+  {{ if .Flash.ErrorMsg }}
+    <div class="row">
+      <div class="alert alert-danger">
+        {{ .Flash.ErrorMsg }}
+      </div>
     </div>
-  </div>
+  {{ end }}
 {{ end }}
