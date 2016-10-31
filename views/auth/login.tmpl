@@ -17,7 +17,7 @@
           <input id="password" class="form-control" name="password" type="password" >
         </div>
 
-        {{ .csrf_token|htmlescape }}
+        {{ .csrf_token|raw }}
 
         <button class="btn btn-primary">
           <span class="glyphicon glyphicon-log-in"></span> Login

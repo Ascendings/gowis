@@ -43,7 +43,12 @@ func main() {
 			"AppVer": func() string {
 				return "1.0.0"
 			},
+			// generate link for route
 			"URLFor": m.URLFor,
+			// output raw HTML
+			"raw": func(text string) template.HTML {
+				return template.HTML(text)
+			},
 		}},
 		// Outputs human readable JSON. Default is false.
 		IndentJSON: true,
