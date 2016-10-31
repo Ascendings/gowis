@@ -1,4 +1,4 @@
-{{ template "views/layout_header" . }}
+{{ template "layout_header" . }}
 
 <div class="row">
   <div class="col-sm-12 panel panel-default">
@@ -6,7 +6,7 @@
       <h1>{{ .page.URLSlug }}</h1>
     </div>
     <div class="panel-body">
-      {{ .convertedPageContent }}
+      {{ .convertedPageContent|raw }}
     </div>
     <div class="row bottom-links">
       <div class="col-sm-12">
@@ -17,4 +17,4 @@
   </div>
 </div>
 
-{{ template "views/layout_footer" . }}
+{{ template "layout_footer" . }}
