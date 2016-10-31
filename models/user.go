@@ -23,7 +23,7 @@ type User struct {
 }
 
 // Fullname - first name + last name
-func (u *User) Fullname() string {
+func (u User) Fullname() string {
 	if u.FirstName == "" || u.LastName == "" {
 		// return an empty string
 		return ""
