@@ -6,6 +6,8 @@ import (
 
 	"github.com/astaxie/beego/orm"
 
+	"github.com/eefret/gravatar"
+
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -31,6 +33,13 @@ func (u User) Fullname() string {
 
 	// return the full name of the user
 	return fmt.Sprintf("%s %s", u.FirstName, u.LastName)
+}
+
+// GetGravatarURL - returns the user's gravatar URL based on his/her email
+func (u User) GetGravatarURL() string {
+	g, _ := gravatar.New()
+
+	return g.URLParse(u.Email)
 }
 
 // HashPassword - hashes a provided password
