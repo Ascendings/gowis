@@ -10,9 +10,10 @@ watch_dirs = [
 	"./app",
 	"./controllers",
 	"./models",
-	"./modules"
+	"./modules",
+	"./views"
 ]						# Directories to watch
-watch_exts = [".go", ".ini"]				# Extensions to watch
+watch_exts = [".go", ".ini", ".tmpl"]				# Extensions to watch
 ignore = [".git", "node_modules"] 	# Directories to exclude from watching
 ignore_files = []					# Regexps for ignoring specific notifies
 build_delay = 1500					# Minimal interval to Trigger build event
