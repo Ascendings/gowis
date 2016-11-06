@@ -20,14 +20,20 @@ func InitRouter(m macaron.Macaron) {
 	w := new(controllers.WikiController)
 	// new Auth controller
 	a := new(controllers.AuthController)
+	// new Users controller
+	u := new(controllers.UserController)
 
 	// group stuff together so that global middleware can run
 	m.Group("", func() {
 
 		// regular routes
 		m.Get("/", w.Home).Name("wiki.home")
+
 		m.Get("/wiki/list", w.List).Name("wiki.list")
 		m.Get("/wiki/view/:urlSlug", w.View).Name("wiki.view")
+
+		m.Get("/users", u.List).Name("users.list")
+		m.Get("/users/:userID", u.View).Name("users.view")
 
 		// authenticated users only routes
 		m.Group("", func() {
