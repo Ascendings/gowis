@@ -27,7 +27,7 @@
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Explore <span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a href="#">Users</a></li>
+              <li><a href="{{ URLFor "users.list" }}">Users</a></li>
               <li><a href="#">Groups</a></li>
               <li><a href="#">Namespaces</a></li>
             </ul>
@@ -37,15 +37,17 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle dropdown-img" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img class="img-rounded" src="{{ .GetGravatarURL }}" alt="" width="30"> <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="/users/{{ .ID }}">{{ .Fullname }}</a></li>
-                <li><a href="/logout">
+                {{ with $userid := printf "%d" .ID }}
+                  <li><a href="{{ URLFor "users.view" ":userID" $userid }}">{{ $user.Fullname }}</a></li>
+                {{ end }}
+                <li><a href="{{ URLFor "auth.logout" }}">
                   <span>Logout</span>&nbsp;
                   <span class="glyphicon glyphicon-log-out"></span>
                 </a></li>
               </ul>
             </li>
           {{ end }}{{ else }}
-            <li class="navbar-link"><a href="/login">
+            <li class="navbar-link"><a href="{{ URLFor "auth.login" }}">
               <span>Login</span>&nbsp;
               <span class="glyphicon glyphicon-log-in"></span>
             </a></li>
