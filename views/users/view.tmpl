@@ -1,0 +1,28 @@
+{{ template "layout_header" . }}
+
+<div class="row">
+  <div class="col-sm-12 panel panel-default">
+    <div class="panel-heading">
+      <h1>{{ .reqUser.Fullname }}</h1>
+    </div>
+    <div class="panel-body">
+      <h3>User Information</h3>
+      <p><span>Username:</span> {{ .reqUser.Username }}</p>
+      <p><span>Email:</span> {{ .reqUser.Email }}</p>
+      <p><span>First Name:</span> {{ .reqUser.FirstName }}</p>
+      <p><span>Last Name:</span> {{ .reqUser.LastName }}</p>
+    </div>
+    <div class="row bottom-links">
+      <div class="col-sm-12">
+        <a class="btn btn-default" href="{{ URLFor "wiki.home" }}">Home</a>
+        {{ if .user }}
+          {{ if eq .reqUser.ID .user.ID }}
+            <a class="btn btn-primary " href="/account/update">Update Profile</a>
+          {{ end }}
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</div>
+
+{{ template "layout_footer" . }}

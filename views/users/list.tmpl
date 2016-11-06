@@ -1,0 +1,20 @@
+{{ template "layout_header" . }}
+
+<div class="row">
+  <div class="col-sm-12 panel panel-default">
+    <div class="panel-heading">
+      <h1>List of Users</h1>
+    </div>
+    <div class="panel-body">
+      <ul>
+        {{ range $user := .users }}
+          {{ with $id := printf "%d" $user.ID }}
+            <li><a href="{{ URLFor "users.view" ":userID" $id }}">{{ $user.Fullname }}</a></li>
+          {{ end }}
+        {{ end }}
+      </ul>
+    </div>
+  </div>
+</div>
+
+{{ template "layout_footer" . }}
