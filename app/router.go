@@ -26,20 +26,20 @@ func InitRouter(m macaron.Macaron) {
 
 		// regular routes
 		m.Get("/", w.Home).Name("wiki.home")
-		m.Get("/list", w.List).Name("wiki.list")
-		m.Get("/view/:urlSlug", w.View).Name("wiki.view")
+		m.Get("/wiki/list", w.List).Name("wiki.list")
+		m.Get("/wiki/view/:urlSlug", w.View).Name("wiki.view")
 
 		// authenticated users only routes
 		m.Group("", func() {
-			m.Combo("/create").Get(w.Create).Post(bindIgnErr(wiki.PageForm{}), csrf.Validate, w.PostCreate).Name("wiki.create")
-			m.Combo("/edit/:urlSlug").Get(w.Edit).Post(bindIgnErr(wiki.PageForm{}), csrf.Validate, w.PostEdit).Name("wiki.edit")
-			m.Get("/logout", a.Logout).Name("auth.logout")
+			m.Combo("/wiki/create").Get(w.Create).Post(bindIgnErr(wiki.PageForm{}), csrf.Validate, w.PostCreate).Name("wiki.create")
+			m.Combo("/wiki/edit/:urlSlug").Get(w.Edit).Post(bindIgnErr(wiki.PageForm{}), csrf.Validate, w.PostEdit).Name("wiki.edit")
+			m.Get("/auth/logout", a.Logout).Name("auth.logout")
 		}, middleware.Auth)
 
 		// guest only routes
 		m.Group("", func() {
-			m.Combo("/register").Get(a.Register).Post(bindIgnErr(auth.RegisterForm{}), csrf.Validate, a.PostRegister).Name("auth.register")
-			m.Combo("/login").Get(a.Login).Post(bindIgnErr(auth.LoginForm{}), csrf.Validate, a.PostLogin).Name("auth.login")
+			m.Combo("/auth/register").Get(a.Register).Post(bindIgnErr(auth.RegisterForm{}), csrf.Validate, a.PostRegister).Name("auth.register")
+			m.Combo("/auth/login").Get(a.Login).Post(bindIgnErr(auth.LoginForm{}), csrf.Validate, a.PostLogin).Name("auth.login")
 		}, middleware.Guest)
 
 	}, middleware.CheckUser)

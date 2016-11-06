@@ -1,12 +1,16 @@
 {{ define "partials_sidebar" }}
   <div id="sidebar-wrapper">
     <ul class="sidebar-nav">
-      <li class="sidebar-link"><a href="/create">
+      <li class="sidebar-link"><a href="{{ URLFor "wiki.list" }}">
+        <span class="sidebar-icon glyphicon glyphicon-list"></span>
+        <span class="sidebar-text">List</span>
+      </a></li>
+      <li class="sidebar-link"><a href="{{ URLFor "wiki.create" }}">
         <span class="sidebar-icon glyphicon glyphicon-file"></span>
         <span class="sidebar-text">Create</span>
       </a></li>
       {{ if .page }}
-        <li class="sidebar-link"><a href="/edit/{{ .page.URLSlug }}">
+        <li class="sidebar-link"><a href="{{ URLFor "wiki.edit" ":urlSlug" .page.URLSlug }}">
           <span class="sidebar-icon glyphicon glyphicon-edit"></span>
           <span class="sidebar-text">Edit</span>
         </a></li>
