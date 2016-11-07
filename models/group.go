@@ -16,7 +16,7 @@ type Group struct {
 	CreatedAt        time.Time `orm:"auto_now_add;type(datetime)"`
 	UpdatedAt        time.Time `orm:"auto_now;type(datetime)"`
 
-	// relations
+	// many-to-many user relationship
 	Users []*User `orm:"reverse(many)"`
 }
 
