@@ -16,6 +16,9 @@ type Page struct {
 	CreatedBy   int
 	CreatedAt   time.Time `orm:"auto_now_add;type(datetime)"`
 	UpdatedAt   time.Time `orm:"auto_now;type(datetime)"`
+
+	// page has many commits
+	Commits []*Commit `orm:"reverse(many)"`
 }
 
 // String - string representation of page

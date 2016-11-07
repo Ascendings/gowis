@@ -23,8 +23,11 @@ type User struct {
 	CreatedAt    time.Time `orm:"auto_now_add;type(datetime)"`
 	UpdatedAt    time.Time `orm:"auto_now;type(datetime)"`
 
-	// relations
+	// many-to-many group relationship
 	Groups []*Group `orm:"rel(m2m);rel_table(users_groups)"`
+
+	// user owns many commits
+	Commits []*Commit `orm:"reverse(many)"`
 }
 
 // Fullname - first name + last name
