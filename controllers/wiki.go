@@ -1,6 +1,8 @@
 package controllers
 
 import (
+	"time"
+
 	"github.com/astaxie/beego/orm"
 	"github.com/go-macaron/csrf"
 	"github.com/go-macaron/session"
@@ -100,7 +102,8 @@ func (w WikiController) PostCreate(ctx *macaron.Context, input wiki.PageForm, se
 		commit := new(models.Commit)
 
 		// set Commit attributes
-		commit.CommitHash = commit.GenerateHash(page.PageContent)
+		commit.CommitHash = commit.GenerateHash(page.PageContent + string(time.Now().UnixNano()))
+		commit.CommitDiff = commit.CreateDiff("", page.PageContent)
 		commit.CommitMessage = input.CommitMessage
 		commit.Page = page
 		commit.User = &user

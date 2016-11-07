@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/astaxie/beego/orm"
+	"github.com/sergi/go-diff/diffmatchpatch"
 )
 
 // Commit - user group model
@@ -44,6 +45,21 @@ func (c Commit) GenerateHash(content string) string {
 
 	// return hash
 	return contentHash
+}
+
+// CreateDiff - create diff message between two different texts
+func (c Commit) CreateDiff(text1, text2 string) string {
+	// new DiffMatchPatch instance
+	dmp := diffmatchpatch.New()
+
+	// create diffs
+	diffs := dmp.DiffMain(text1, text2, true)
+
+	// generate diff text
+	patch := dmp.PatchMake(diffs)
+	diffText := dmp.PatchToText(patch)
+
+	return diffText
 }
 
 // registers model with DB
