@@ -24,7 +24,7 @@ func (w WikiController) Home(ctx *macaron.Context) {
 }
 
 // List - wiki pages
-func (w WikiController) List(ctx *macaron.Context, sess session.Store) {
+func (w WikiController) List(ctx *macaron.Context) {
 	// pages array
 	var pages []models.Page
 
@@ -54,7 +54,7 @@ func (w WikiController) Create(ctx *macaron.Context, x csrf.CSRF) {
 }
 
 // PostCreate - post route for creating page
-func (w WikiController) PostCreate(ctx *macaron.Context, input wiki.PageForm, f *session.Flash, x csrf.CSRF) {
+func (w WikiController) PostCreate(ctx *macaron.Context, input wiki.PageForm, sess session.Store, f *session.Flash, x csrf.CSRF) {
 	// validate form Data
 	input.Validate()
 	// check for validation errors
@@ -83,11 +83,34 @@ func (w WikiController) PostCreate(ctx *macaron.Context, input wiki.PageForm, f 
 		page.CreatedBy = 1
 
 		// save the page
-		_, err := models.DB.Insert(page)
+		pageID, pageErr := models.DB.Insert(page)
+		// set page ID value to the returned value from the insert query
+		page.ID = int(pageID)
 		// check for errors
-		if err != nil {
+		if pageErr != nil {
 			// flash the error message to the user
-			f.Error(err.Error(), false)
+			f.Error(pageErr.Error(), false)
+			// redirect the user to the home page
+			ctx.Redirect(ctx.URLFor("wiki.home"))
+		}
+
+		user := sess.Get("user").(models.User)
+
+		// create new commit model
+		commit := new(models.Commit)
+
+		// set Commit attributes
+		commit.CommitHash = commit.GenerateHash(page.PageContent)
+		commit.CommitMessage = input.CommitMessage
+		commit.Page = page
+		commit.User = &user
+
+		// save the commit
+		_, commitErr := models.DB.Insert(commit)
+		// check for errors
+		if commitErr != nil {
+			// flash the error message to the user
+			f.Error(commitErr.Error(), false)
 			// redirect the user to the home page
 			ctx.Redirect(ctx.URLFor("wiki.home"))
 		}
