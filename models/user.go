@@ -22,6 +22,9 @@ type User struct {
 	LastName     string    `orm:"null"`
 	CreatedAt    time.Time `orm:"auto_now_add;type(datetime)"`
 	UpdatedAt    time.Time `orm:"auto_now;type(datetime)"`
+
+	// relations
+	Groups []*Group `orm:"rel(m2m);rel_table(users_groups)"`
 }
 
 // Fullname - first name + last name
