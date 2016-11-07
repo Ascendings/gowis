@@ -1,7 +1,6 @@
 package main
 
 import (
-	"html/template"
 	"log"
 	"net/http"
 	"strings"
@@ -14,6 +13,7 @@ import (
 
 	"gogs.ballantine.tech/gballan1/gowis/app"
 	"gogs.ballantine.tech/gballan1/gowis/models"
+	"gogs.ballantine.tech/gballan1/gowis/modules/template"
 )
 
 func main() {
@@ -32,24 +32,14 @@ func main() {
 	// integrate CSRF protection stuff
 	m.Use(csrf.Csrfer())
 
+	// get the template function map
+	funcMap := template.NewFuncMap(m)
+
 	m.Use(macaron.Renderer(macaron.RenderOptions{
 		// Directory to load templates. Default is "templates".
 		Directory: "views",
 		// Funcs is a slice of FuncMaps to apply to the template upon compilation. Default is [].
-		Funcs: []template.FuncMap{map[string]interface{}{
-			"AppName": func() string {
-				return "Macaron"
-			},
-			"AppVer": func() string {
-				return "1.0.0"
-			},
-			// generate link for route
-			"URLFor": m.URLFor,
-			// output raw HTML
-			"raw": func(text string) template.HTML {
-				return template.HTML(text)
-			},
-		}},
+		Funcs: funcMap,
 		// Outputs human readable JSON. Default is false.
 		IndentJSON: true,
 		// Outputs human readable XML. Default is false.
