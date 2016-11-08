@@ -25,6 +25,17 @@ type Commit struct {
 	Page *Page `orm:"rel(fk)"`
 }
 
+// New - create new commit instance
+func (c Commit) New(pageContent, commitMessage string, page *Page, user *User) *Commit {
+	return &Commit{
+		CommitHash:    Commit{}.GenerateHash(pageContent + string(time.Now().UnixNano())),
+		CommitDiff:    Commit{}.CreateDiff("", pageContent),
+		CommitMessage: commitMessage,
+		User:          user,
+		Page:          page,
+	}
+}
+
 // String - string representation of page
 func (c *Commit) String() string {
 	return fmt.Sprintf("%s", c.CommitHash)

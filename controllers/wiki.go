@@ -1,12 +1,10 @@
 package controllers
 
 import (
-	"time"
-
 	"github.com/astaxie/beego/orm"
 	"github.com/go-macaron/csrf"
 	"github.com/go-macaron/session"
-	"gopkg.in/macaron.v1"
+	macaron "gopkg.in/macaron.v1"
 
 	"gogs.ballantine.tech/gballan1/gowis/models"
 	"gogs.ballantine.tech/gballan1/gowis/modules/wiki"
@@ -99,14 +97,7 @@ func (w WikiController) PostCreate(ctx *macaron.Context, input wiki.PageForm, se
 		user := sess.Get("user").(models.User)
 
 		// create new commit model
-		commit := new(models.Commit)
-
-		// set Commit attributes
-		commit.CommitHash = commit.GenerateHash(page.PageContent + string(time.Now().UnixNano()))
-		commit.CommitDiff = commit.CreateDiff("", page.PageContent)
-		commit.CommitMessage = input.CommitMessage
-		commit.Page = page
-		commit.User = &user
+		commit := models.Commit{}.New(page.PageContent, input.CommitMessage, page, &user)
 
 		// save the commit
 		_, commitErr := models.DB.Insert(commit)
