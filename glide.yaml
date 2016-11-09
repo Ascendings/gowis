@@ -1,0 +1,27 @@
+package: gogs.ballantine.tech/gballan1/gowis
+import:
+- package: github.com/astaxie/beego
+  version: ^1.7.1
+  subpackages:
+  - orm
+  - validation
+- package: github.com/fatih/structs
+- package: github.com/go-macaron/binding
+- package: github.com/go-macaron/cache
+- package: github.com/go-macaron/csrf
+- package: github.com/go-macaron/session
+- package: github.com/golang-commonmark/markdown
+- package: github.com/mattn/go-sqlite3
+  version: ^1.1.0
+- package: github.com/sergi/go-diff
+  subpackages:
+  - diffmatchpatch
+- package: gogs.ballantine.tech/gballan1/gravago
+  version: ^0.3.1
+- package: golang.org/x/crypto
+  subpackages:
+  - bcrypt
+- package: gopkg.in/ini.v1
+  version: ^1.21.1
+- package: gopkg.in/macaron.v1
+  version: ^1.1.8

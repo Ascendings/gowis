@@ -1,0 +1,48 @@
+hash: 8cfda1d80990074d7c45b47e4e3591bc61017c68b3997fd754ccde34f19a2e6f
+updated: 2016-11-09T11:41:54.894304303-05:00
+imports:
+- name: github.com/astaxie/beego
+  version: 2d87d4feafeea0a133d217a82e6e02df0348fed5
+  subpackages:
+  - orm
+  - validation
+- name: github.com/fatih/structs
+  version: dc3312cb1a4513a366c4c9e622ad55c32df12ed3
+- name: github.com/go-macaron/binding
+  version: 9440f336b443056c90d7d448a0a55ad8c7599880
+- name: github.com/go-macaron/cache
+  version: 56173531277692bc2925924d51fda1cd0a6b8178
+- name: github.com/go-macaron/csrf
+  version: 6a9a7df172cc1fcd81e4585f44b09200b6087cc0
+- name: github.com/go-macaron/inject
+  version: d8a0b8677191f4380287cfebd08e462217bac7ad
+- name: github.com/go-macaron/session
+  version: 66031fcb37a0fff002a1f028eb0b3a815c78306b
+- name: github.com/golang-commonmark/markdown
+  version: 9e199b881116ec8dec80c69b927b43f9482a669d
+  subpackages:
+  - byteutil
+  - html
+  - linkify
+- name: github.com/mattn/go-sqlite3
+  version: 3b3f1d01b2696af5501697c35629048c227586ab
+- name: github.com/opennota/urlesc
+  version: 5bd2802263f21d8788851d5305584c82a5c75d7e
+- name: github.com/sergi/go-diff
+  version: 552b4e9bbdca9e5adafd95ee98c822fdd11b330b
+  subpackages:
+  - diffmatchpatch
+- name: github.com/Unknwon/com
+  version: 28b053d5a2923b87ce8c5a08f3af779894a72758
+- name: gogs.ballantine.tech/gballan1/gravago
+  version: e0e259ae1d116f02321622b77cfb8b110ce772aa
+- name: golang.org/x/crypto
+  version: 9477e0b78b9ac3d0b03822fd95422e2fe07627cd
+  subpackages:
+  - bcrypt
+  - blowfish
+- name: gopkg.in/ini.v1
+  version: 6e4869b434bd001f6983749881c7ead3545887d8
+- name: gopkg.in/macaron.v1
+  version: 4974334b10dbb6f5c0e17f4c10555ff050a16329
+testImports: []
