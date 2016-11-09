@@ -26,10 +26,21 @@ type Commit struct {
 }
 
 // New - create new commit instance
-func (c Commit) New(pageContent, commitMessage string, page *Page, user *User) *Commit {
+func (c Commit) NewCreateCommit(pageContent, commitMessage string, page *Page, user *User) *Commit {
 	return &Commit{
 		CommitHash:    Commit{}.GenerateHash(pageContent + string(time.Now().UnixNano())),
 		CommitDiff:    Commit{}.CreateDiff("", pageContent),
+		CommitMessage: commitMessage,
+		User:          user,
+		Page:          page,
+	}
+}
+
+// New - create new commit instance
+func (c Commit) NewEditCommit(oldContent, newContent, commitMessage string, page *Page, user *User) *Commit {
+	return &Commit{
+		CommitHash:    Commit{}.GenerateHash(oldContent + string(time.Now().UnixNano())),
+		CommitDiff:    Commit{}.CreateDiff(oldContent, newContent),
 		CommitMessage: commitMessage,
 		User:          user,
 		Page:          page,

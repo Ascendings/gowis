@@ -97,7 +97,7 @@ func (w WikiController) PostCreate(ctx *macaron.Context, input wiki.PageForm, se
 		user := sess.Get("user").(models.User)
 
 		// create new commit model
-		commit := models.Commit{}.New(page.PageContent, input.CommitMessage, page, &user)
+		commit := models.Commit{}.NewCreateCommit(page.PageContent, input.CommitMessage, page, &user)
 
 		// save the commit
 		_, commitErr := models.DB.Insert(commit)
@@ -171,7 +171,7 @@ func (w WikiController) Edit(ctx *macaron.Context, f *session.Flash, x csrf.CSRF
 }
 
 // PostEdit - post backend for editing a page
-func (w WikiController) PostEdit(ctx *macaron.Context, input wiki.PageForm, f *session.Flash, x csrf.CSRF) {
+func (w WikiController) PostEdit(ctx *macaron.Context, input wiki.PageForm, f *session.Flash, sess session.Store, x csrf.CSRF) {
 	// Page model
 	page := models.Page{URLSlug: ctx.Params("urlSlug")}
 
@@ -183,6 +183,9 @@ func (w WikiController) PostEdit(ctx *macaron.Context, input wiki.PageForm, f *s
 		// redirect the user
 		ctx.Redirect(ctx.URLFor("wiki.list"))
 	} else {
+		// save old content for commit record
+		oldContent := page.PageContent
+
 		// change the page attributes
 		page.URLSlug = input.URLSlug
 		page.PageContent = input.PageContent
@@ -211,6 +214,21 @@ func (w WikiController) PostEdit(ctx *macaron.Context, input wiki.PageForm, f *s
 			if err != nil {
 				// flash the error message to the user
 				f.Error(err.Error(), false)
+				// redirect the user to the home page
+				ctx.Redirect(ctx.URLFor("wiki.home"))
+			}
+
+			user := sess.Get("user").(models.User)
+
+			// create new commit model
+			commit := models.Commit{}.NewEditCommit(oldContent, page.PageContent, input.CommitMessage, &page, &user)
+
+			// save the commit
+			_, commitErr := models.DB.Insert(commit)
+			// check for errors
+			if commitErr != nil {
+				// flash the error message to the user
+				f.Error(commitErr.Error(), false)
 				// redirect the user to the home page
 				ctx.Redirect(ctx.URLFor("wiki.home"))
 			}
