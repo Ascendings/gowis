@@ -18,7 +18,7 @@ module.exports = function(grunt) {
         },
         files: [{
           expand: true,
-          cwd: 'assets/sass',
+          cwd: 'resources/assets/sass',
           src: ['*.sass'],
           dest: 'public/css',
           ext: '.full.css'
@@ -31,7 +31,7 @@ module.exports = function(grunt) {
       compile: {
         expand: true,
         flatten: true,
-        cwd: 'assets/coffee',
+        cwd: 'resources/assets/coffee',
         src: ['*.coffee'],
         dest: 'public/js',
         ext: '.full.js'
