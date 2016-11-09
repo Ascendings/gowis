@@ -1,5 +1,6 @@
-# ignore the installed vendor files
+# ignore the installed vendor files - these are installed manually
 .vendor/
+vendor/
 
 # ignore the built binary
 gowis
