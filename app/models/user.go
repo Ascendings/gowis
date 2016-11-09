@@ -6,7 +6,7 @@ import (
 
 	"github.com/astaxie/beego/orm"
 
-	"github.com/eefret/gravatar"
+	"gogs.ballantine.tech/gballan1/gravago"
 
 	"golang.org/x/crypto/bcrypt"
 )
@@ -43,9 +43,14 @@ func (u User) Fullname() string {
 
 // GetGravatarURL - returns the user's gravatar URL based on his/her email
 func (u User) GetGravatarURL() string {
-	g, _ := gravatar.New()
+	grav := gravago.New()
 
-	return g.URLParse(u.Email)
+	// change some options
+	grav.SetSize(64)       // set the icon size to 80
+	grav.SetIcons("retro") // use monsterid default icons
+	grav.UseHTTPS(true)    // force HTTPS
+
+	return grav.URL(u.Email)
 }
 
 // HashPassword - hashes a provided password
