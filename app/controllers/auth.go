@@ -5,8 +5,8 @@ import (
 	"github.com/go-macaron/csrf"
 	"github.com/go-macaron/session"
 
-	"gogs.ballantine.tech/gballan1/gowis/models"
-	"gogs.ballantine.tech/gballan1/gowis/modules/auth"
+	"gogs.ballantine.tech/gballan1/gowis/app/models"
+	"gogs.ballantine.tech/gballan1/gowis/app/modules/auth"
 
 	macaron "gopkg.in/macaron.v1"
 )

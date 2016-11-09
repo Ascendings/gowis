@@ -6,7 +6,7 @@ import (
 	"github.com/astaxie/beego/validation"
 	"github.com/fatih/structs"
 
-	"gogs.ballantine.tech/gballan1/gowis/modules/base"
+	"gogs.ballantine.tech/gballan1/gowis/app/modules/base"
 )
 
 // Form - base form class

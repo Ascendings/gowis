@@ -7,7 +7,7 @@ import (
 	"github.com/go-macaron/session"
 	"gopkg.in/macaron.v1"
 
-	"gogs.ballantine.tech/gballan1/gowis/models"
+	"gogs.ballantine.tech/gballan1/gowis/app/models"
 )
 
 // UserController - wiki controller

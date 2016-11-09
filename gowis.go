@@ -12,8 +12,8 @@ import (
 	macaron "gopkg.in/macaron.v1"
 
 	"gogs.ballantine.tech/gballan1/gowis/app"
-	"gogs.ballantine.tech/gballan1/gowis/models"
-	"gogs.ballantine.tech/gballan1/gowis/modules/template"
+	"gogs.ballantine.tech/gballan1/gowis/app/models"
+	"gogs.ballantine.tech/gballan1/gowis/app/modules/template"
 )
 
 func main() {
@@ -37,7 +37,7 @@ func main() {
 
 	m.Use(macaron.Renderer(macaron.RenderOptions{
 		// Directory to load templates. Default is "templates".
-		Directory: "views",
+		Directory: "resources/views",
 		// Funcs is a slice of FuncMaps to apply to the template upon compilation. Default is [].
 		Funcs: funcMap,
 		// Outputs human readable JSON. Default is false.

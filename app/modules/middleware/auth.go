@@ -5,7 +5,7 @@ import (
 
 	"github.com/go-macaron/session"
 
-	"gogs.ballantine.tech/gballan1/gowis/models"
+	"gogs.ballantine.tech/gballan1/gowis/app/models"
 
 	"gopkg.in/macaron.v1"
 )
