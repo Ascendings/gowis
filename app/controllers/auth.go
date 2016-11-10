@@ -28,7 +28,7 @@ func (a *AuthController) Register(ctx *macaron.Context, x csrf.CSRF) {
 }
 
 // PostRegister - user registration post stuff
-func (a *AuthController) PostRegister(ctx *macaron.Context, input auth.RegisterForm, f *session.Flash, x csrf.CSRF) {
+func (a *AuthController) PostRegister(ctx *macaron.Context, input auth.RegisterForm, sess session.Store, f *session.Flash, x csrf.CSRF) {
 	// validate form Data
 	input.Validate()
 	// check for validation errors
@@ -62,7 +62,7 @@ func (a *AuthController) PostRegister(ctx *macaron.Context, input auth.RegisterF
 		user.LastName = input.LastName
 
 		// save the user
-		_, err := models.DB.Insert(user)
+		userID, err := models.DB.Insert(user)
 		// check for errors
 		if err != nil {
 			// flash the error message to the user
@@ -71,10 +71,13 @@ func (a *AuthController) PostRegister(ctx *macaron.Context, input auth.RegisterF
 			ctx.Redirect(ctx.URLFor("auth.register"))
 		}
 
+		// set the user as logged in automatically after the account has been created
+		sess.Set("user_id", int(userID))
+
 		// let the user know we're all good
 		f.Success("Your account was created successfully!", false)
 		// redirect the user
-		ctx.Redirect(ctx.URLFor("auth.login"))
+		ctx.Redirect(ctx.URLFor("wiki.home"))
 	}
 }
 
