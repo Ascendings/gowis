@@ -39,6 +39,7 @@ func InitRouter(m macaron.Macaron) {
 		m.Group("", func() {
 			m.Combo("/wiki/create").Get(w.Create).Post(bindIgnErr(wiki.PageForm{}), csrf.Validate, w.PostCreate).Name("wiki.create")
 			m.Combo("/wiki/edit/:urlSlug").Get(w.Edit).Post(bindIgnErr(wiki.PageForm{}), csrf.Validate, w.PostEdit).Name("wiki.edit")
+			m.Get("/wiki/delete/:urlSlug", w.Delete).Name("wiki.delete")
 			m.Get("/auth/logout", a.Logout).Name("auth.logout")
 		}, middleware.Auth)
 
@@ -49,5 +50,4 @@ func InitRouter(m macaron.Macaron) {
 		}, middleware.Guest)
 
 	}, middleware.CheckUser)
-
 }

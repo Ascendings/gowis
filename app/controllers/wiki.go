@@ -238,3 +238,28 @@ func (w WikiController) PostEdit(ctx *macaron.Context, input wiki.PageForm, f *s
 		}
 	}
 }
+
+// Delete - delete a wiki page
+func (w WikiController) Delete(ctx *macaron.Context, f *session.Flash, sess session.Store) {
+	// find the page
+	page := models.Page{URLSlug: ctx.Params("urlSlug")}
+
+	// find the page
+	err := models.DB.Read(&page, "url_slug")
+	if err == orm.ErrNoRows || err == orm.ErrMissPK {
+		// let the user know the page doesn't exist
+		f.Info("That page doesn't exist", false)
+		// redirect the user
+		ctx.Redirect(ctx.URLFor("wiki.list"))
+	}
+
+	// attempt to delete the page record
+	if _, delErr := models.DB.Delete(&page); err != nil {
+		// there's an error, let's panic now
+		panic(delErr)
+	}
+
+	// success! Flash the user and redirect him/her
+	f.Success("The page was successfully deleted.", false)
+	ctx.Redirect(ctx.URLFor("wiki.list"))
+}
