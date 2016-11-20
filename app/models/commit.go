@@ -20,9 +20,9 @@ type Commit struct {
 	UpdatedAt     time.Time `orm:"auto_now;type(datetime)"`
 
 	// commit belongs to user
-	User *User `orm:"rel(fk)"`
+	User *User `orm:"rel(fk);null"`
 	// commit belongs to page
-	Page *Page `orm:"rel(fk)"`
+	Page *Page `orm:"rel(fk);on_delete(do_nothing)"`
 }
 
 // New - create new commit instance
