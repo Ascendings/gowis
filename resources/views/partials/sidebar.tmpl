@@ -14,6 +14,10 @@
           <span class="sidebar-icon glyphicon glyphicon-edit"></span>
           <span class="sidebar-text">Edit</span>
         </a></li>
+        <li class="sidebar-link"><a href="{{ URLFor "wiki.delete" ":urlSlug" .page.URLSlug }}">
+          <span class="sidebar-icon glyphicon glyphicon-remove"></span>
+          <span class="sidebar-text">Delete</span>
+        </a></li>
       {{ end }}
       <li class="sidebar-link"><a href="#">
         <span class="sidebar-icon glyphicon glyphicon-cog"></span>
