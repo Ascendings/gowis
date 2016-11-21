@@ -6,13 +6,30 @@
       <h1>List of Users</h1>
     </div>
     <div class="panel-body">
-      <ul>
-        {{ range $user := .users }}
-          {{ with $id := printf "%d" $user.ID }}
-            <li><a href="{{ URLFor "users.view" ":userID" $id }}">{{ $user.Fullname }}</a></li>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{ range $user := .users }}
+            {{ with $id := printf "%d" $user.ID }}
+              <tr>
+                <td>{{ $user.ID }}</td>
+                <td><a href="{{ URLFor "users.view" ":userID" $id }}">{{ $user.Username }}</a></td>
+                <td>{{ $user.Email }}</td>
+                <td>{{ $user.FirstName }}</td>
+                <td>{{ $user.LastName }}</td>
+              </tr>
+            {{ end }}
           {{ end }}
-        {{ end }}
-      </ul>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
