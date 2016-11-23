@@ -10,15 +10,17 @@ import (
 
 // Page - wiki page model
 type Page struct {
-	ID          int    `orm:"pk;auto;column(id)"`
-	URLSlug     string `orm:"unique;column(url_slug)"`
-	PageContent string `orm:"type(text)"`
-	CreatedBy   int
+	ID          int       `orm:"pk;auto;column(id)"`
+	URLSlug     string    `orm:"unique;column(url_slug)"`
+	PageContent string    `orm:"type(text)"`
 	CreatedAt   time.Time `orm:"auto_now_add;type(datetime)"`
 	UpdatedAt   time.Time `orm:"auto_now;type(datetime)"`
 
 	// page has many commits
 	Commits []*Commit `orm:"reverse(many)"`
+
+	// page has one creator
+	CreatedBy *User `orm:"rel(fk);on_delete(do_nothing);null"`
 }
 
 // String - string representation of page

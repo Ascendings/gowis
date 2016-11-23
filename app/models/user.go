@@ -28,6 +28,9 @@ type User struct {
 
 	// user owns many commits
 	Commits []*Commit `orm:"reverse(many)"`
+
+	// user creates many pages
+	PagesCreated []*Page `orm:"reverse(many)"`
 }
 
 // Fullname - first name + last name

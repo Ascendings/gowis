@@ -77,10 +77,12 @@ func (w WikiController) PostCreate(ctx *macaron.Context, input wiki.PageForm, se
 		// Page model
 		page := new(models.Page)
 
+		user := sess.Get("user").(models.User)
+
 		// set the page attributes
 		page.URLSlug = input.URLSlug
 		page.PageContent = input.PageContent
-		page.CreatedBy = 1
+		page.CreatedBy = &user
 
 		// save the page
 		pageID, pageErr := models.DB.Insert(page)
@@ -93,8 +95,6 @@ func (w WikiController) PostCreate(ctx *macaron.Context, input wiki.PageForm, se
 			// redirect the user to the home page
 			ctx.Redirect(ctx.URLFor("wiki.home"))
 		}
-
-		user := sess.Get("user").(models.User)
 
 		// create new commit model
 		commit := models.Commit{}.NewCreateCommit(page.PageContent, input.CommitMessage, page, &user)
