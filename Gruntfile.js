@@ -62,6 +62,21 @@ module.exports = function(grunt) {
           ext: '.js',
         }]
       }
+    },
+
+    // watch sass and CoffeeScript files for live reloading
+    watch: {
+      scripts: {
+        files: [
+          'resources/assets/coffee/*.coffee',
+          'resources/assets/sass/*.sass',
+          'resources/assets/sass/*.scss',
+        ],
+        tasks: ['sass', 'coffee', 'cssmin', 'uglify'],
+        options: {
+          spawn: false
+        }
+      }
     }
 
   });
@@ -71,8 +86,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-coffee');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
   // do the tasks
-  grunt.registerTask('default', ['sass', 'coffee', 'cssmin', 'uglify']);
+  grunt.registerTask('default', ['sass', 'coffee', 'cssmin', 'uglify', 'watch']);
 
 };
