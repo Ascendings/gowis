@@ -1,6 +1,8 @@
 package controllers
 
 import (
+	"fmt"
+
 	"github.com/astaxie/beego/orm"
 	"github.com/go-macaron/csrf"
 	"github.com/go-macaron/session"
@@ -132,8 +134,12 @@ func (w WikiController) View(ctx *macaron.Context, f *session.Flash) {
 	} else {
 		// add the page result to the view
 		ctx.Data["page"] = page
+		// load relationship(s)
+		models.DB.LoadRelated(&page, "CreatedBy")
 		// add converted HTML to view
 		ctx.Data["convertedPageContent"] = page.ConvertPageContent()
+
+		fmt.Printf("%s\n", page.CreatedBy.Fullname())
 
 		// set the title
 		ctx.Data["title"] = "View Page | Gowis"
