@@ -68,9 +68,9 @@ module.exports = function(grunt) {
     watch: {
       scripts: {
         files: [
-          'resources/assets/coffee/*.coffee',
-          'resources/assets/sass/*.sass',
-          'resources/assets/sass/*.scss',
+          'resources/assets/coffee/**/*.coffee',
+          'resources/assets/sass/**/*.sass',
+          'resources/assets/sass/**/*.scss',
         ],
         tasks: ['sass', 'coffee', 'cssmin', 'uglify'],
         options: {
