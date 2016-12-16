@@ -6,8 +6,12 @@
       <h1>List of Pages</h1>
     </div>
     <div class="panel-body">
-      {{ range $page := .pages }}
-        <p><a href="{{ URLFor "wiki.view" ":urlSlug" $page.URLSlug }}">{{ $page.URLSlug }}</a></p>
+      {{ if (len .pages) gt 0 }}
+        {{ range $page := .pages }}
+          <p><a href="{{ URLFor "wiki.view" ":urlSlug" $page.URLSlug }}">{{ $page.URLSlug }}</a></p>
+        {{ end }}
+      {{ else }}
+        <p>I'm sorry, there don't seem to be any pages available right now. Maybe you should try <a href="{{ URLFor "wiki.create" }}">creating one</a>?</p>
       {{ end }}
     </div>
   </div>
