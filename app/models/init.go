@@ -6,6 +6,10 @@ import (
 	"github.com/astaxie/beego/orm"
 	// loading SQLite dialect for beego ORM
 	_ "github.com/mattn/go-sqlite3"
+	// loading MySQL dialect for beego ORM
+	_ "github.com/go-sql-driver/mysql"
+	// loading Postgres dialect for beego ORM
+	_ "github.com/lib/pq"
 )
 
 var (

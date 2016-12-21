@@ -1,8 +1,8 @@
-hash: 8cfda1d80990074d7c45b47e4e3591bc61017c68b3997fd754ccde34f19a2e6f
-updated: 2016-11-09T11:41:54.894304303-05:00
+hash: 7f9223983f1dbb45202843677fc93e29b613b369c63ab1f15a082218fb769b59
+updated: 2016-12-21T15:01:34.612778772-05:00
 imports:
 - name: github.com/astaxie/beego
-  version: 2d87d4feafeea0a133d217a82e6e02df0348fed5
+  version: 90999717dda6193c6f970eec52e289b0a9e74998
   subpackages:
   - orm
   - validation
@@ -18,14 +18,18 @@ imports:
   version: d8a0b8677191f4380287cfebd08e462217bac7ad
 - name: github.com/go-macaron/session
   version: 66031fcb37a0fff002a1f028eb0b3a815c78306b
+- name: github.com/go-sql-driver/mysql
+  version: a0583e0143b1624142adab07e0e97fe106d99561
 - name: github.com/golang-commonmark/markdown
   version: 9e199b881116ec8dec80c69b927b43f9482a669d
   subpackages:
   - byteutil
   - html
   - linkify
+- name: github.com/lib/pq
+  version: 5bf161122cd640c2a5a2c1d7fa49ea9befff31dd
 - name: github.com/mattn/go-sqlite3
-  version: 3b3f1d01b2696af5501697c35629048c227586ab
+  version: ca5e3819723d8eeaf170ad510e7da1d6d2e94a08
 - name: github.com/opennota/urlesc
   version: 5bd2802263f21d8788851d5305584c82a5c75d7e
 - name: github.com/sergi/go-diff
@@ -41,8 +45,12 @@ imports:
   subpackages:
   - bcrypt
   - blowfish
+- name: golang.org/x/net
+  version: daba796358cd2742b75aae05761f1b898c9f6a5c
+  subpackages:
+  - context
 - name: gopkg.in/ini.v1
-  version: 6e4869b434bd001f6983749881c7ead3545887d8
+  version: 6f66b0e091edb3c7b380f7c4f0f884274d550b67
 - name: gopkg.in/macaron.v1
-  version: 4974334b10dbb6f5c0e17f4c10555ff050a16329
+  version: 826ddf13862c544525338a2deda6f57ffd1a9083
 testImports: []
