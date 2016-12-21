@@ -1,9 +1,13 @@
-package app
+package settings
 
 import "gopkg.in/ini.v1"
 
-// InitConfig - returns the finalized configuration object
-func InitConfig() *ini.File {
+var (
+	// Cfg - configuration settings
+	Cfg *ini.File
+)
+
+func init() {
 	// load the config file
 	cfg, cfgErr := ini.InsensitiveLoad("./conf/app.ini")
 
@@ -12,5 +16,5 @@ func InitConfig() *ini.File {
 		panic(cfgErr)
 	}
 
-	return cfg
+	Cfg = cfg
 }

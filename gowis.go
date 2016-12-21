@@ -14,15 +14,13 @@ import (
 	"gogs.ballantine.tech/gballan1/gowis/app"
 	"gogs.ballantine.tech/gballan1/gowis/app/models"
 	"gogs.ballantine.tech/gballan1/gowis/modules/middleware"
+	"gogs.ballantine.tech/gballan1/gowis/modules/settings"
 	"gogs.ballantine.tech/gballan1/gowis/modules/template"
 )
 
 func main() {
 	// initialize macaron router
 	m := macaron.Classic()
-
-	// load our configuration
-	cfg := app.InitConfig()
 
 	// integrate macaron's caching module
 	m.Use(cache.Cacher())
@@ -64,6 +62,6 @@ func main() {
 	// let the user know we're running!
 	log.Println("Server is running...")
 	log.Println(http.ListenAndServe(strings.Join([]string{
-		cfg.Section("server").Key("address").String(),
-		cfg.Section("server").Key("port").String()}, ":"), m))
+		settings.Cfg.Section("server").Key("address").String(),
+		settings.Cfg.Section("server").Key("port").String()}, ":"), m))
 }
