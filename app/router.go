@@ -49,5 +49,5 @@ func InitRouter(m macaron.Macaron) {
 			m.Combo("/auth/login").Get(a.Login).Post(bindIgnErr(auth.LoginForm{}), csrf.Validate, a.PostLogin).Name("auth.login")
 		}, middleware.Guest)
 
-	}, middleware.CheckUser)
+	}, middleware.CheckUser, middleware.CsrfView)
 }

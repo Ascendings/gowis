@@ -18,9 +18,6 @@ type AuthController struct {
 
 // Register - user registration view
 func (a *AuthController) Register(ctx *macaron.Context, x csrf.CSRF) {
-	// add the CSRF token to the view
-	ctx.Data["csrf_token"] = a.CreateCsrfField(x)
-
 	// set the page title
 	ctx.Data["title"] = "Register | Gowis"
 	// render the view
@@ -39,9 +36,6 @@ func (a *AuthController) PostRegister(ctx *macaron.Context, input auth.RegisterF
 
 		// pass the user's input back to the view
 		ctx.Data["input"] = input
-
-		// pass a new CSRF token
-		ctx.Data["csrf_token"] = a.CreateCsrfField(x)
 
 		// let the user know that were some problems with their submission
 		f.Error("There were some problems with your submission. Please review your information", true)
@@ -83,9 +77,6 @@ func (a *AuthController) PostRegister(ctx *macaron.Context, input auth.RegisterF
 
 // Login - user login view
 func (a *AuthController) Login(ctx *macaron.Context, x csrf.CSRF) {
-	// add the CSRF token to the view
-	ctx.Data["csrf_token"] = a.CreateCsrfField(x)
-
 	// set the page title
 	ctx.Data["title"] = "Login | Gowis"
 	// render the view

@@ -43,10 +43,7 @@ func (w WikiController) List(ctx *macaron.Context) {
 }
 
 // Create - create new wiki page
-func (w WikiController) Create(ctx *macaron.Context, x csrf.CSRF) {
-	// add the CSRF token to the view
-	ctx.Data["csrf_token"] = w.CreateCsrfField(x)
-
+func (w WikiController) Create(ctx *macaron.Context) {
 	// set the title
 	ctx.Data["title"] = "Create New Page | Gowis"
 	// render view
@@ -65,9 +62,6 @@ func (w WikiController) PostCreate(ctx *macaron.Context, input wiki.PageForm, se
 
 		// pass the user's input back to the view
 		ctx.Data["input"] = input
-
-		// add a new CSRF token to the view
-		ctx.Data["csrf_token"] = w.CreateCsrfField(x)
 
 		// let the user know that were some problems with their submission
 		f.Error("There were some problems with your submission. Please review your information", true)
@@ -147,9 +141,6 @@ func (w WikiController) View(ctx *macaron.Context, f *session.Flash) {
 
 // Edit - edit a page
 func (w WikiController) Edit(ctx *macaron.Context, f *session.Flash, x csrf.CSRF) {
-	// add the CSRF token to the view
-	ctx.Data["csrf_token"] = w.CreateCsrfField(x)
-
 	// Page model
 	page := models.Page{URLSlug: ctx.Params("urlSlug")}
 
@@ -205,9 +196,6 @@ func (w WikiController) PostEdit(ctx *macaron.Context, input wiki.PageForm, f *s
 			// add the page and old URL slug to the view
 			ctx.Data["page"] = page
 			ctx.Data["oldslug"] = ctx.Params("urlSlug")
-
-			// add a new CSRF token to the view
-			ctx.Data["csrf_token"] = w.CreateCsrfField(x)
 
 			w.Render(ctx, "wiki/edit")
 		} else {
