@@ -13,6 +13,7 @@ import (
 
 	"gogs.ballantine.tech/gballan1/gowis/app"
 	"gogs.ballantine.tech/gballan1/gowis/app/models"
+	"gogs.ballantine.tech/gballan1/gowis/app/modules/middleware"
 	"gogs.ballantine.tech/gballan1/gowis/app/modules/template"
 )
 
@@ -49,6 +50,10 @@ func main() {
 		// Prefixes the XML output with the given bytes. Default is no prefix.
 		PrefixXML: []byte("macaron"),
 	}))
+
+	// integrate our middleware into the application
+	m.Use(middleware.CheckUser)
+	m.Use(middleware.CsrfView)
 
 	// initialize the router with routes
 	app.InitRouter(*m)
