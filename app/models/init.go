@@ -3,6 +3,8 @@ package models
 import (
 	"fmt"
 
+	"gogs.ballantine.tech/gballan1/gowis/modules/settings"
+
 	"github.com/astaxie/beego/orm"
 	// loading SQLite dialect for beego ORM
 	_ "github.com/mattn/go-sqlite3"
@@ -17,12 +19,14 @@ var (
 	DB orm.Ormer
 )
 
-// sets up our DB
+// set up our DB
 func init() {
-	// register SQLite database driver
+	// register database drivers
 	orm.RegisterDriver("sqlite3", orm.DRSqlite)
+	orm.RegisterDriver("mysql", orm.DRMySQL)
+	orm.RegisterDriver("postgres", orm.DRPostgres)
 	// register our database connection
-	orm.RegisterDataBase("default", "sqlite3", "gowis.db")
+	orm.RegisterDataBase("default", settings.Cfg.Section("database").Key("driver").String(), "gowis.db")
 }
 
 // InitDB - creates DB connection
