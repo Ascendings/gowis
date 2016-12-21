@@ -17,6 +17,8 @@ import (
 var (
 	// DB - beego database engine object
 	DB orm.Ormer
+
+	dbSettings = settings.Cfg.Section("database")
 )
 
 // set up our DB
@@ -26,7 +28,25 @@ func init() {
 	orm.RegisterDriver("mysql", orm.DRMySQL)
 	orm.RegisterDriver("postgres", orm.DRPostgres)
 	// register our database connection
-	orm.RegisterDataBase("default", settings.Cfg.Section("database").Key("driver").String(), "gowis.db")
+	orm.RegisterDataBase("default", dbSettings.Key("driver").String(), createConnectionString())
+}
+
+func createConnectionString() string {
+	dbDriver := dbSettings.Key("driver").String()
+	// check the driver
+	if dbDriver == "sqlite3" {
+		// we can return the sqlite db path
+		return dbSettings.Key("path").String()
+	} else if dbDriver == "mysql" || dbDriver == "postgres" {
+		// now we need to build a connection string
+		return fmt.Sprintf("%s:%s@%s/%s?charset=%s",
+			dbSettings.Key("username").String(), dbSettings.Key("password").String(),
+			dbSettings.Key("host").String(), dbSettings.Key("db_name").String(),
+			dbSettings.Key("charset").String())
+	}
+
+	// return nothing here
+	return ""
 }
 
 // InitDB - creates DB connection
