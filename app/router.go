@@ -5,9 +5,9 @@ import (
 	"github.com/go-macaron/csrf"
 
 	"gogs.ballantine.tech/gballan1/gowis/app/controllers"
-	"gogs.ballantine.tech/gballan1/gowis/app/modules/auth"
-	"gogs.ballantine.tech/gballan1/gowis/app/modules/middleware"
-	"gogs.ballantine.tech/gballan1/gowis/app/modules/wiki"
+	"gogs.ballantine.tech/gballan1/gowis/modules/auth"
+	"gogs.ballantine.tech/gballan1/gowis/modules/middleware"
+	"gogs.ballantine.tech/gballan1/gowis/modules/wiki"
 
 	"gopkg.in/macaron.v1"
 )

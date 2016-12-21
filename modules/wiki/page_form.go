@@ -4,7 +4,7 @@ import (
 	"github.com/astaxie/beego/validation"
 	"github.com/fatih/structs"
 
-	"gogs.ballantine.tech/gballan1/gowis/app/modules/web"
+	"gogs.ballantine.tech/gballan1/gowis/modules/web"
 )
 
 // PageForm - form used for creating a page

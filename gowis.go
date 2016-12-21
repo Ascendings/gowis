@@ -13,8 +13,8 @@ import (
 
 	"gogs.ballantine.tech/gballan1/gowis/app"
 	"gogs.ballantine.tech/gballan1/gowis/app/models"
-	"gogs.ballantine.tech/gballan1/gowis/app/modules/middleware"
-	"gogs.ballantine.tech/gballan1/gowis/app/modules/template"
+	"gogs.ballantine.tech/gballan1/gowis/modules/middleware"
+	"gogs.ballantine.tech/gballan1/gowis/modules/template"
 )
 
 func main() {

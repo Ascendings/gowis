@@ -7,7 +7,7 @@ import (
 	macaron "gopkg.in/macaron.v1"
 
 	"gogs.ballantine.tech/gballan1/gowis/app/models"
-	"gogs.ballantine.tech/gballan1/gowis/app/modules/wiki"
+	"gogs.ballantine.tech/gballan1/gowis/modules/wiki"
 )
 
 // WikiController - wiki controller
