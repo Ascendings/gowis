@@ -4,12 +4,12 @@ import (
 	"fmt"
 
 	"github.com/astaxie/beego/orm"
-	// loading SQLite dialect for gorm ORM
+	// loading SQLite dialect for beego ORM
 	_ "github.com/mattn/go-sqlite3"
 )
 
 var (
-	// DB - gorm database engine object
+	// DB - beego database engine object
 	DB orm.Ormer
 )
 

@@ -25,7 +25,7 @@ type Commit struct {
 	Page *Page `orm:"rel(fk);on_delete(do_nothing)"`
 }
 
-// New - create new commit instance
+// NewCreateCommit - create new commit instance for a page creation
 func (c Commit) NewCreateCommit(pageContent, commitMessage string, page *Page, user *User) *Commit {
 	return &Commit{
 		CommitHash:    Commit{}.GenerateHash(pageContent + string(time.Now().UnixNano())),
@@ -36,7 +36,7 @@ func (c Commit) NewCreateCommit(pageContent, commitMessage string, page *Page, u
 	}
 }
 
-// New - create new commit instance
+// NewEditCommit - create new commit instance for an edit
 func (c Commit) NewEditCommit(oldContent, newContent, commitMessage string, page *Page, user *User) *Commit {
 	return &Commit{
 		CommitHash:    Commit{}.GenerateHash(oldContent + string(time.Now().UnixNano())),
