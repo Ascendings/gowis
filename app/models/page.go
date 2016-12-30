@@ -38,6 +38,20 @@ func (p *Page) ConvertPageContent() string {
 	return md.RenderToString([]byte(p.PageContent))
 }
 
+// LastEditedBy - returns the user model that last edited this page
+func (p Page) LastEditedBy() *User {
+	// load commit relationship
+	DB.LoadRelated(&p, "Commits")
+
+	// retrieve latest commit
+	lastCommit := p.Commits[0]
+
+	// load the user relationship for the commit
+	DB.LoadRelated(lastCommit, "User")
+
+	return lastCommit.User
+}
+
 // registers model with DB
 func init() {
 	orm.RegisterModel(new(Page))
