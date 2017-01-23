@@ -1,4 +1,4 @@
-package: gogs.ballantine.tech/gballan1/gowis
+package: github.com/Ascendings/gowis
 import:
 - package: github.com/astaxie/beego
   version: ^1.7.1
@@ -16,7 +16,7 @@ import:
 - package: github.com/sergi/go-diff
   subpackages:
   - diffmatchpatch
-- package: gogs.ballantine.tech/gballan1/gravago
+- package: github.com/Ascendings/gravago
   version: ^0.3.1
 - package: golang.org/x/crypto
   subpackages:

@@ -3,7 +3,7 @@ package models
 import (
 	"fmt"
 
-	"gogs.ballantine.tech/gballan1/gowis/modules/settings"
+	"github.com/Ascendings/gowis/modules/settings"
 
 	"github.com/astaxie/beego/orm"
 	// loading SQLite dialect for beego ORM

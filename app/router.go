@@ -4,10 +4,10 @@ import (
 	"github.com/go-macaron/binding"
 	"github.com/go-macaron/csrf"
 
-	"gogs.ballantine.tech/gballan1/gowis/app/controllers"
-	"gogs.ballantine.tech/gballan1/gowis/modules/auth"
-	"gogs.ballantine.tech/gballan1/gowis/modules/middleware"
-	"gogs.ballantine.tech/gballan1/gowis/modules/wiki"
+	"github.com/Ascendings/gowis/app/controllers"
+	"github.com/Ascendings/gowis/modules/auth"
+	"github.com/Ascendings/gowis/modules/middleware"
+	"github.com/Ascendings/gowis/modules/wiki"
 
 	"gopkg.in/macaron.v1"
 )

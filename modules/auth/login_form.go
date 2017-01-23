@@ -4,7 +4,7 @@ import (
 	"github.com/astaxie/beego/validation"
 	"github.com/fatih/structs"
 
-	"gogs.ballantine.tech/gballan1/gowis/modules/web"
+	"github.com/Ascendings/gowis/modules/web"
 )
 
 // LoginForm - form used for creating a page

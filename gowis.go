@@ -11,11 +11,11 @@ import (
 
 	macaron "gopkg.in/macaron.v1"
 
-	"gogs.ballantine.tech/gballan1/gowis/app"
-	"gogs.ballantine.tech/gballan1/gowis/app/models"
-	"gogs.ballantine.tech/gballan1/gowis/modules/middleware"
-	"gogs.ballantine.tech/gballan1/gowis/modules/settings"
-	"gogs.ballantine.tech/gballan1/gowis/modules/template"
+	"github.com/Ascendings/gowis/app"
+	"github.com/Ascendings/gowis/app/models"
+	"github.com/Ascendings/gowis/modules/middleware"
+	"github.com/Ascendings/gowis/modules/settings"
+	"github.com/Ascendings/gowis/modules/template"
 )
 
 func main() {

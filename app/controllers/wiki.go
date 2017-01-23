@@ -6,8 +6,8 @@ import (
 	"github.com/go-macaron/session"
 	macaron "gopkg.in/macaron.v1"
 
-	"gogs.ballantine.tech/gballan1/gowis/app/models"
-	"gogs.ballantine.tech/gballan1/gowis/modules/wiki"
+	"github.com/Ascendings/gowis/app/models"
+	"github.com/Ascendings/gowis/modules/wiki"
 )
 
 // WikiController - wiki controller

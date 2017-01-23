@@ -6,7 +6,7 @@ import (
 
 	"github.com/astaxie/beego/orm"
 
-	"gogs.ballantine.tech/gballan1/gravago"
+	"github.com/Ascendings/gravago"
 
 	"golang.org/x/crypto/bcrypt"
 )

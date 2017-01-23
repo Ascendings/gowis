@@ -38,7 +38,7 @@ imports:
   - diffmatchpatch
 - name: github.com/Unknwon/com
   version: 28b053d5a2923b87ce8c5a08f3af779894a72758
-- name: gogs.ballantine.tech/gballan1/gravago
+- name: github.com/Ascendings/gravago
   version: e0e259ae1d116f02321622b77cfb8b110ce772aa
 - name: golang.org/x/crypto
   version: 9477e0b78b9ac3d0b03822fd95422e2fe07627cd
