@@ -16,7 +16,7 @@
           {{ if .errors.urlslug }}
             <ul>
               {{ range $error := .errors.urlslug }}
-                <li><span class="help-block">{{ .error }}</span></li>
+                <li><span class="help-block">{{ $error }}</span></li>
               {{ end }}
             </ul>
           {{ end }}
@@ -33,7 +33,7 @@
           {{ if .errors.commitmessage }}
             <ul>
               {{ range $error := .errors.commitmessage }}
-                <li><span class="help-block">{{ .error }}</span></li>
+                <li><span class="help-block">{{ $error }}</span></li>
               {{ end }}
             </ul>
           {{ end }}
