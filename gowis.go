@@ -1,6 +1,7 @@
 package main
 
 import (
+  "fmt"
 	"log"
 	"net/http"
 	"strings"
@@ -22,14 +23,8 @@ func main() {
 	// initialize macaron router
 	m := macaron.Classic()
 
-	// integrate macaron's caching module
-	m.Use(cache.Cacher())
-
-	// integrate macaron's session module
-	m.Use(session.Sessioner())
-
-	// integrate CSRF protection stuff
-	m.Use(csrf.Csrfer())
+	// create DB connection
+	models.InitDB()
 
 	// get the template function map
 	funcMap := template.NewFuncMap(m)
@@ -49,6 +44,15 @@ func main() {
 		PrefixXML: []byte("macaron"),
 	}))
 
+	// integrate macaron's caching module
+	m.Use(cache.Cacher())
+
+	// integrate macaron's session module
+	m.Use(session.Sessioner())
+
+	// integrate CSRF protection stuff
+	m.Use(csrf.Csrfer())
+
 	// integrate our middleware into the application
 	m.Use(middleware.CheckUser)
 	m.Use(middleware.CsrfView)
@@ -56,12 +60,14 @@ func main() {
 	// initialize the router with routes
 	app.InitRouter(*m)
 
-	// create DB connection
-	models.InitDB()
+  // get the values for the address and port to listen on
+  hostname := settings.Cfg.Section("server").Key("address").String()
+  port := settings.Cfg.Section("server").Key("port").String()
+  socketAddress := strings.Join([]string{hostname, port}, ":")
 
 	// let the user know we're running!
-	log.Println("Server is running...")
-	log.Println(http.ListenAndServe(strings.Join([]string{
-		settings.Cfg.Section("server").Key("address").String(),
-		settings.Cfg.Section("server").Key("port").String()}, ":"), m))
+	log.Println(fmt.Sprintf("Starting the Gowis Wiki server on %s", socketAddress))
+	if err := http.ListenAndServe(socketAddress, m);err != nil {
+    log.Fatalln("Gowis Wiki has gone down with issue: ", err)
+  }
 }

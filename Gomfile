@@ -1,4 +1,3 @@
-gom 'github.com/Ascendings/gowis', :commit => '41b319b6b5cb2747a87d54c322e0a9083faff277'
 gom 'github.com/Ascendings/gravago', :commit => 'e0e259ae1d116f02321622b77cfb8b110ce772aa'
 gom 'github.com/Unknwon/com', :commit => '0db4a625e949e956314d7d1adea9bf82384cc10c'
 gom 'github.com/astaxie/beego', :commit => '323a1c4214101331a4b71922c23d19b7409ac71f'
