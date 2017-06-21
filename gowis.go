@@ -44,11 +44,14 @@ func main() {
 		PrefixXML: []byte("macaron"),
 	}))
 
+	// integrate macaron's session module
+  m.Use(session.Sessioner(session.Options{
+    Provider:       "file",
+    ProviderConfig: "data/sessions",
+  }))
+
 	// integrate macaron's caching module
 	m.Use(cache.Cacher())
-
-	// integrate macaron's session module
-	m.Use(session.Sessioner())
 
 	// integrate CSRF protection stuff
 	m.Use(csrf.Csrfer())

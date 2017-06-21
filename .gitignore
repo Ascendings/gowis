@@ -5,14 +5,12 @@ vendor/
 # ignore the built binary
 gowis
 
-# we don't need to sync the DB and log files
-*.db
+# we don't need to sync the log files
 *.log
-data/
 log/
 
-# file-based sessions really should not be synced
-.sessions/
+# data directory that stores local data (mainly for testing)
+data/
 
 # NPM modules
 node_modules/
