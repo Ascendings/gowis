@@ -131,9 +131,8 @@ func (a *AuthController) PostLogin(ctx *macaron.Context, input auth.LoginForm, f
 func (a *AuthController) Logout(ctx *macaron.Context, f *session.Flash, sess session.Store) {
 	// unset the session
 	if sess.Get("user_id") != nil || sess.Get("user") != nil {
-		// unset the stuff
-		sess.Set("user_id", nil)
-		sess.Set("user", nil)
+		// erase the session completely
+		sess.Destory(ctx)
 
 		// flash message to user
 		f.Info("You have been successfully logged out")
